@@ -1,6 +1,6 @@
 # Coordinated Omission a pasti průměrných časů
 
-Referát z předmětu **FJP** (ZČU FAV), cca 10 minut. Webová prezentace ve stylu „měřicího protokolu“ (milimetrový papír, tmavé displeje, Fraunces + IBM Plex): 15 slidů, krokované odhalování, přechody mezi slidy, načítající se čísla a režim řečníka s textem k přednesu.
+Referát z předmětu **KIV/PTE – Pokročilé testování** (ZČU FAV), cca 10 minut. Webová prezentace ve stylu „měřicího protokolu“ (milimetrový papír, tmavé displeje, Fraunces + IBM Plex): 15 slidů, krokované odhalování, přechody mezi slidy, načítající se čísla a režim řečníka s textem k přednesu.
 
 Text k přednesu je v [`SCENAR.md`](SCENAR.md).
 
@@ -47,5 +47,6 @@ Obsah slidů i poznámky jsou v `src/slides.js`, logika v `src/main.js`, vzhled 
 5. B. Schroeder, A. Wierman, M. Harchol-Balter: [Open Versus Closed: A Cautionary Tale](https://www.usenix.org/conference/nsdi-06/open-versus-closed-cautionary-tale), NSDI 2006
 6. Grafana k6: [Open and closed models](https://grafana.com/docs/k6/latest/using-k6/scenarios/concepts/open-vs-closed/)
 7. [HdrHistogram](https://github.com/HdrHistogram/HdrHistogram)
+8. BlazeMeter: [Open Model Thread Group in JMeter](https://www.blazemeter.com/blog/open-model-thread-group)
 
 Struktura (krokované slidy, předěly kapitol, citace se zdroji na konci) je inspirovaná prezentací [SWEBOK v4 a ASVS 5.0](https://swebok-asvs.vercel.app/).

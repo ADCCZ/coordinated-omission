@@ -28,7 +28,7 @@ const words = slides.reduce((a, s) => a + s.notes.split(/\s+/).length, 0);
 let t = 0;
 let md = `# Coordinated Omission a pasti průměrných časů: text k přednesu
 
-Referát FJP, ZČU FAV · Oldřich Švehla
+Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Švehla
 
 Plánovaná délka **${mmss(total)}** (${words} slov, zhruba 130 slov za minutu).
 **[KLIK]** znamená posun na další krok (šipka → nebo mezerník).

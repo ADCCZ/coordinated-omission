@@ -23,7 +23,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 function headHTML(s, i) {
   if (s.head === false) return '';
   return `<div class="head">
-    <p class="l">Coordinated omission · FJP</p>
+    <p class="l">Coordinated omission · KIV/PTE</p>
     <p class="c">${s.section || ''}</p>
     <p class="r">${pad(i + 1)} / ${pad(TOTAL)}</p>
     <span class="rule"></span>

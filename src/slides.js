@@ -110,7 +110,7 @@ export const slides = [
   <text x="1104" y="612" fill="${C.plumLight}" font-size="22" letter-spacing="1.5" ${MONO}>ZAŽITO UŽIVATELI</text>
   <text x="128" y="890" fill="${C.amber}" font-size="22" letter-spacing="1.5" ${MONO}>NAMĚŘENO</text>
 </svg>
-<p class="kicker" style="left:128px;top:112px;width:1200px">Referát · FJP · ZČU FAV</p>
+<p class="kicker" style="left:128px;top:112px;width:1200px">Referát · KIV/PTE Pokročilé testování · ZČU FAV</p>
 <h1 class="display" data-split style="left:122px;top:170px;width:1500px;font-size:168px">Coordinated omission</h1>
 <p class="italic amber" style="left:128px;top:352px;width:1500px;font-size:88px;line-height:1.1">a pasti průměrných časů</p>
 <p class="body" style="left:128px;top:490px;width:900px;color:${C.onDarkMuted}">Proč benchmark ukazuje rychlý systém, který uživatelé zažívají jako pomalý.</p>
@@ -169,7 +169,7 @@ export const slides = [
     cls: 'paper',
     section: '01 · Co měříme',
     tr: 'slide',
-    sec: 70,
+    sec: 75,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:1600px">Uzavřená smyčka${cite('5,6')}</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">Generátor čeká na odpověď, než pošle další</h2>
@@ -193,7 +193,7 @@ export const slides = [
   ${dotsRow({ y: 190, from: 600, to: 1080, step: 40, r: 9, skipFrom: 600, skipTo: 1080, hollow: true })}
 </svg>
 <p class="body" data-step="2" style="left:128px;top:800px;width:1664px"><b>Dalších 13 požadavků nikdo neposlal</b>, a proto je nikdo ani nezměřil.</p>`,
-    notes: `Většina klasických nástrojů pro zátěžové testy funguje v takzvané uzavřené smyčce. Každé spojení pošle požadavek, počká na odpověď, zapíše, jak dlouho to trvalo, a teprve potom pošle další. Horní řada ukazuje, kdy jsme chtěli požadavky posílat, třeba sto za sekundu. Dokud server odpovídá rychle, spodní řada plán věrně kopíruje. [KLIK] Teď se server na chvíli zasekne, třeba kvůli garbage collectoru, zámku v databázi nebo přetížené síti. Požadavek, který zrovna běží, čeká, a generátor čeká s ním. Až odpověď dorazí, zapíše se jeden pomalý vzorek. [KLIK] A tady je ten problém. Všechny tyhle požadavky měly během zaseknutí odejít, ale generátor je neposlal, protože čekal. Kdo je neposlal, ten je ani nezměřil. Z celého výpadku tak v datech zůstane jediný pomalý vzorek mezi stovkami rychlých.`,
+    notes: `Většina klasických nástrojů pro zátěžové testy funguje v takzvané uzavřené smyčce. Tak funguje i běžná Thread Group v JMeteru, který používáme na cvičeních. Každé vlákno pošle požadavek, počká na odpověď, zapíše, jak dlouho to trvalo, a teprve potom pošle další. Horní řada ukazuje, kdy jsme chtěli požadavky posílat, třeba sto za sekundu. Dokud server odpovídá rychle, spodní řada plán věrně kopíruje. [KLIK] Teď se server na chvíli zasekne, třeba kvůli garbage collectoru, zámku v databázi nebo přetížené síti. Požadavek, který zrovna běží, čeká, a generátor čeká s ním. Až odpověď dorazí, zapíše se jeden pomalý vzorek. [KLIK] A tady je ten problém. Všechny tyhle požadavky měly během zaseknutí odejít, ale generátor je neposlal, protože čekal. Kdo je neposlal, ten je ani nezměřil. Z celého výpadku tak v datech zůstane jediný pomalý vzorek mezi stovkami rychlých.`,
   },
 
   {
@@ -395,19 +395,19 @@ ${[
     cls: 'paper',
     section: '03 · Jak měřit správně',
     tr: 'slide',
-    sec: 75,
+    sec: 85,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:900px">Řešení</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">Dvě opravy měření, dvě opravy shrnutí</h2>
 ${[
-  ['01 · MĚŘENÍ', 'Posílej podle plánu, ne podle odpovědí', `Otevřený model: požadavky přicházejí stálým tempem bez ohledu na to, jak rychle server odpovídá.${cite('5,6')}`, 'wrk2: wrk -t2 -c100 -d30s -R2000 …<br>k6: executor: constant-arrival-rate'],
+  ['01 · MĚŘENÍ', 'Posílej podle plánu, ne podle odpovědí', `Otevřený model: požadavky přicházejí stálým tempem bez ohledu na to, jak rychle server odpovídá.${cite('5,6,9')}`, 'JMeter 5.5+: Open Model Thread Group<br>k6: executor: constant-arrival-rate<br>wrk2: wrk -t2 -c100 -d30s -R2000 …'],
   ['02 · MĚŘENÍ', 'Počítej čas od plánovaného odeslání', `Latence = konec − okamžik, kdy požadavek <i>měl</i> odejít. HdrHistogram umí chybějící vzorky dopočítat, když zná plánovaný interval.${cite('2,7')}`, 'recordValueWithExpectedInterval()'],
   ['03 · SHRNUTÍ', 'Hlas rozdělení, ne jedno číslo', `p50, p90, p99, p99,9 a maximum. Nejlépe celý graf percentilů.${cite(1)}`, ''],
   ['04 · SHRNUTÍ', 'Slučuj histogramy, ne percentily', `Histogramy se dají sčítat přes čas i servery. Percentil se počítá až z výsledku.${cite(7)}`, ''],
 ]
   .map(
     ([n, h, t, code], k) => `
-<div class="panel" ${k ? `data-step="${k}"` : ''} style="left:${128 + (k % 2) * 856}px;top:${310 + Math.floor(k / 2) * 330}px;width:808px;height:${k < 2 ? 300 : 230}px;display:flex;flex-direction:column;gap:12px">
+<div class="panel" ${k ? `data-step="${k}"` : ''} style="left:${128 + (k % 2) * 856}px;top:${300 + Math.floor(k / 2) * 360}px;width:808px;height:${k < 2 ? 340 : 230}px;display:flex;flex-direction:column;gap:12px">
   <p class="n">${n}</p>
   <p class="h3">${h}</p>
   <p class="small" style="font-size:24px">${t}</p>
@@ -415,7 +415,7 @@ ${[
 </div>`
   )
   .join('')}`,
-    notes: `Řešení má dvě části: opravit měření a opravit shrnutí. První oprava: zátěž se posílá podle plánu, ne podle odpovědí. Tomu se říká otevřený model. Požadavky přicházejí stálým tempem, stejně jako skuteční uživatelé, kterým je jedno, že server má zrovna problém. Rozdíl mezi otevřeným a uzavřeným modelem popsali už v roce 2006 Schroeder, Wierman a Harchol-Balter. V praxi to umí třeba wrk2 s parametrem -R nebo k6 s executorem constant-arrival-rate. [KLIK] Druhá oprava: čas se počítá od okamžiku, kdy požadavek MĚL odejít, ne kdy skutečně odešel. Knihovna HdrHistogram navíc umí chybějící vzorky dopočítat, když jí řeknete, jaký byl plánovaný interval mezi požadavky. [KLIK] Třetí: místo jednoho čísla hlásit rozdělení. Medián, devadesátý, devadesátý devátý percentil, tři devítky a maximum. Ideálně celý graf. [KLIK] A čtvrtá: když agregujete přes čas nebo přes servery, slučujte histogramy. Histogramy se dají sčítat, percentily ne.`,
+    notes: `Řešení má dvě části: opravit měření a opravit shrnutí. První oprava: zátěž se posílá podle plánu, ne podle odpovědí. Tomu se říká otevřený model. Požadavky přicházejí stálým tempem, stejně jako skuteční uživatelé, kterým je jedno, že server má zrovna problém. Rozdíl mezi otevřeným a uzavřeným modelem popsali už v roce 2006 Schroeder, Wierman a Harchol-Balter. V JMeteru k tomu slouží Open Model Thread Group, která je v něm od verze 5.5. Plánuje příchody požadavků místo počtu souběžných vláken. Podobně to umí k6 s executorem constant-arrival-rate nebo wrk2 s parametrem -R. [KLIK] Druhá oprava: čas se počítá od okamžiku, kdy požadavek MĚL odejít, ne kdy skutečně odešel. Knihovna HdrHistogram navíc umí chybějící vzorky dopočítat, když jí řeknete, jaký byl plánovaný interval mezi požadavky. [KLIK] Třetí: místo jednoho čísla hlásit rozdělení. Medián, devadesátý, devadesátý devátý percentil, tři devítky a maximum. Ideálně celý graf. [KLIK] A čtvrtá: když agregujete přes čas nebo přes servery, slučujte histogramy. Histogramy se dají sčítat, percentily ne.`,
   },
 
   {
@@ -458,11 +458,12 @@ ${[
   <div class="src"><p class="i">[3]</p><div><p class="t">Coordinated Omission <span>· diskuse, skupina Mechanical Sympathy</span></p><a href="https://groups.google.com/g/mechanical-sympathy/c/icNZJejUHfE/m/BfDekfBEs_sJ" target="_blank" rel="noopener">groups.google.com/g/mechanical-sympathy/c/icNZJejUHfE</a></div></div>
   <div class="src"><p class="i">[4]</p><div><p class="t">The Tail at Scale <span>· J. Dean, L. A. Barroso, Communications of the ACM 56(2), 2013</span></p><a href="https://doi.org/10.1145/2408776.2408794" target="_blank" rel="noopener">doi.org/10.1145/2408776.2408794</a></div></div>
 </div>
-<div style="left:992px;top:220px;width:800px;display:flex;flex-direction:column;gap:30px">
+<div style="left:992px;top:220px;width:800px;display:flex;flex-direction:column;gap:26px">
   <div class="src"><p class="i">[5]</p><div><p class="t">Open Versus Closed: A Cautionary Tale <span>· B. Schroeder, A. Wierman, M. Harchol-Balter, NSDI 2006</span></p><a href="https://www.usenix.org/conference/nsdi-06/open-versus-closed-cautionary-tale" target="_blank" rel="noopener">usenix.org/conference/nsdi-06/open-versus-closed-cautionary-tale</a></div></div>
   <div class="src"><p class="i">[6]</p><div><p class="t">Open and closed models <span>· Grafana k6, dokumentace</span></p><a href="https://grafana.com/docs/k6/latest/using-k6/scenarios/concepts/open-vs-closed/" target="_blank" rel="noopener">grafana.com/docs/k6/latest/…/open-vs-closed</a></div></div>
   <div class="src"><p class="i">[7]</p><div><p class="t">HdrHistogram <span>· G. Tene a kol., GitHub</span></p><a href="https://github.com/HdrHistogram/HdrHistogram" target="_blank" rel="noopener">github.com/HdrHistogram/HdrHistogram</a></div></div>
   <div class="src"><p class="i">[8]</p><div><p class="t">How NOT to Measure Latency, přepis záznamu <span>· Amara</span></p><a href="https://amara.org/videos/0vqzbDPNIIbE/en/1317064/3393860/" target="_blank" rel="noopener">amara.org/videos/0vqzbDPNIIbE</a></div></div>
+  <div class="src"><p class="i">[9]</p><div><p class="t">Open Model Thread Group in JMeter <span>· BlazeMeter</span></p><a href="https://www.blazemeter.com/blog/open-model-thread-group" target="_blank" rel="noopener">blazemeter.com/blog/open-model-thread-group</a></div></div>
 </div>
 <p class="small muted" style="left:128px;top:900px;width:1664px">Čísla v Pasti 1 a 2 a výpočty v myšlenkovém pokusu jsou vlastní modelové výpočty. Past 3 předpokládá nezávislé servery.</p>`,
     notes: `Zdroje najdete tady, celá prezentace je online i s odkazy. Děkuji za pozornost a rád odpovím na otázky.`,

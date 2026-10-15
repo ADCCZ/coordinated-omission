@@ -1,7 +1,7 @@
 {
   "name": "coordinated-omission-referat",
   "version": "1.0.0",
-  "description": "Referát FJP (ZČU FAV): Coordinated Omission a pasti průměrných časů",
+  "description": "Referát KIV/PTE (ZČU FAV): Coordinated Omission a pasti průměrných časů",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
