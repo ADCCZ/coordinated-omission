@@ -116,7 +116,7 @@ export const slides = [
 <p class="body" style="left:128px;top:490px;width:900px;color:${C.onDarkMuted}">Proč benchmark ukazuje rychlý systém, který uživatelé zažívají jako pomalý.</p>
 <p class="label" style="left:128px;top:990px;width:800px;color:${C.onDark}">Oldřich Švehla</p>
 <p class="label right" style="left:992px;top:990px;width:800px">Pojem: Gil Tene, Azul Systems${cite(1)}</p>`,
-    notes: `Dobrý den. Dnes vám chci ukázat, proč čísla z benchmarků a z monitoringu často lžou, i když je nikdo úmyslně nezfalšoval. Příčiny jsou dvě. První je coordinated omission, česky koordinované vynechání. Ten pojem zavedl Gil Tene ze společnosti Azul Systems. Druhou příčinou jsou průměry, a obecně to, jak z tisíců měření uděláme jedno číslo, které pak ukážeme v grafu nebo v tabulce. Graf na pozadí ukazuje celý problém v malém: měřič zapsal jediný pomalý vzorek a během výpadku pak nezapsal nic. Růžově je to, co by mezitím zažili uživatelé.`,
+    notes: `Dobrý den. Když děláme benchmark nebo zátěžový test, jednou z hlavních metrik je doba odezvy. Dnes vám ukážu, proč naměřená doba odezvy často lže, i když nikdo nic nefalšuje. Příčiny jsou dvě. První je coordinated omission, česky koordinované vynechání. Ten pojem zavedl Gil Tene ze společnosti Azul Systems. Druhou jsou průměry, a obecně to, jak z tisíců měření uděláme jedno číslo. Graf na pozadí je celý problém v malém: měřič zapsal jediný pomalý vzorek a během výpadku pak nezapsal nic. Růžově je to, co mezitím zažili uživatelé.`,
   },
 
   {
@@ -169,7 +169,7 @@ export const slides = [
     cls: 'paper',
     section: '01 · Co měříme',
     tr: 'slide',
-    sec: 75,
+    sec: 70,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:1600px">Uzavřená smyčka${cite('5,6')}</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">Generátor čeká na odpověď, než pošle další</h2>
@@ -193,7 +193,7 @@ export const slides = [
   ${dotsRow({ y: 190, from: 600, to: 1080, step: 40, r: 9, skipFrom: 600, skipTo: 1080, hollow: true })}
 </svg>
 <p class="body" data-step="2" style="left:128px;top:800px;width:1664px"><b>Dalších 13 požadavků nikdo neposlal</b>, a proto je nikdo ani nezměřil.</p>`,
-    notes: `Většina klasických nástrojů pro zátěžové testy funguje v takzvané uzavřené smyčce. Tak funguje i běžná Thread Group v JMeteru, který používáme na cvičeních. Každé vlákno pošle požadavek, počká na odpověď, zapíše, jak dlouho to trvalo, a teprve potom pošle další. Horní řada ukazuje, kdy jsme chtěli požadavky posílat, třeba sto za sekundu. Dokud server odpovídá rychle, spodní řada plán věrně kopíruje. [KLIK] Teď se server na chvíli zasekne, třeba kvůli garbage collectoru, zámku v databázi nebo přetížené síti. Požadavek, který zrovna běží, čeká, a generátor čeká s ním. Až odpověď dorazí, zapíše se jeden pomalý vzorek. [KLIK] A tady je ten problém. Všechny tyhle požadavky měly během zaseknutí odejít, ale generátor je neposlal, protože čekal. Kdo je neposlal, ten je ani nezměřil. Z celého výpadku tak v datech zůstane jediný pomalý vzorek mezi stovkami rychlých.`,
+    notes: `Většina klasických nástrojů pro zátěžové testy funguje v takzvané uzavřené smyčce. Tak funguje i běžná Thread Group v JMeteru. Každé vlákno pošle požadavek, počká na odpověď, zapíše, jak dlouho to trvalo, a teprve potom pošle další. Horní řada ukazuje, kdy jsme chtěli požadavky posílat, třeba sto za sekundu. Dokud server odpovídá rychle, spodní řada plán věrně kopíruje. [KLIK] Teď se server na chvíli zasekne, třeba kvůli garbage collectoru, zámku v databázi nebo přetížené síti. Požadavek, který zrovna běží, čeká, a generátor čeká s ním. Až odpověď dorazí, zapíše se jeden pomalý vzorek. [KLIK] A tady je ten problém. Všechny tyhle požadavky měly během zaseknutí odejít, ale generátor je neposlal, protože čekal. Kdo je neposlal, ten je ani nezměřil. Z celého výpadku tak v datech zůstane jediný pomalý vzorek mezi stovkami rychlých.`,
   },
 
   {
@@ -226,7 +226,7 @@ export const slides = [
     cls: 'paper',
     section: '01 · Co měříme',
     tr: 'slide',
-    sec: 75,
+    sec: 65,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:900px">Myšlenkový pokus · Gil Tene${cite('1,8')}</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">100 s běží, 100 s stojí</h2>
@@ -243,7 +243,7 @@ export const slides = [
   <tr><td>99,99. percentil</td><td class="v"><span data-count>1</span> ms</td><td class="v col-u nomove" data-step="1">≈ <span data-count>100</span> s</td></tr>
 </table>
 <p class="body" data-step="2" style="left:128px;top:900px;width:1664px"><span class="mark">Server je v obou sloupcích stejný.</span> Liší se jen způsob měření.</p>`,
-    notes: `Jak velký to má dopad? Tene ve své přednášce používá jednoduchý myšlenkový pokus. Systém sto sekund odpovídá za jednu milisekundu při zátěži sto požadavků za sekundu. Pak ho na sto sekund zmrazíme, v terminálu na to stačí Ctrl+Z. Generátor v uzavřené smyčce nasbírá deset tisíc vzorků po jedné milisekundě a jeden jediný vzorek o délce sto sekund. Průměr vyjde necelých jedenáct milisekund a i 99,99. percentil ukazuje jednu milisekundu. Vypadá to jako skvělý systém. [KLIK] Teď spočítejme, co by zažili uživatelé, kteří by chodili dál rovnoměrně, sto za sekundu. Během zmrazení by přišlo dalších deset tisíc požadavků a ty by čekaly v průměru padesát sekund. Průměr přes celých dvě stě sekund je kolem pětadvaceti sekund, 75. percentil padesát sekund a 99,99. percentil sto sekund. Medián je pořád zhruba jedna milisekunda, takže ani medián vás nezachrání. [KLIK] A všimněte si: server je v obou sloupcích stejný. Liší se jen způsob měření.`,
+    notes: `Jak velký to má dopad? Tene ve své přednášce používá myšlenkový pokus. Systém sto sekund odpovídá za jednu milisekundu při sto požadavcích za sekundu. Pak ho na sto sekund zmrazíme, třeba přes Ctrl+Z. Generátor v uzavřené smyčce nasbírá deset tisíc rychlých vzorků a jeden vzorek o délce sto sekund. Průměr vyjde necelých jedenáct milisekund a i 99,99. percentil ukazuje jednu milisekundu. Skvělý systém. [KLIK] Kdyby ale uživatelé chodili dál podle plánu, během zmrazení by přišlo dalších deset tisíc požadavků a čekaly by v průměru padesát sekund. Průměr přes dvě stě sekund je pak asi pětadvacet sekund, 75. percentil padesát a 99,99. percentil sto sekund. Medián je pořád kolem milisekundy, takže ani ten nepomůže. [KLIK] Server je v obou sloupcích stejný. Liší se jen způsob měření.`,
   },
 
   {
@@ -251,7 +251,7 @@ export const slides = [
     cls: 'dark',
     section: '01 · Co měříme',
     tr: 'zoom',
-    sec: 40,
+    sec: 30,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:1600px">wrk2 · 2 000 req/s · 30 s · server pozastaven na 1,4 s${cite(2)}</p>
 <p class="read amber" style="left:118px;top:205px;width:1664px;font-size:340px;letter-spacing:-16px">~<span data-count>200</span>×</p>
@@ -264,7 +264,7 @@ export const slides = [
   <p class="read" style="font-size:110px;margin-top:18px;color:${C.plumLight}"><span data-count>1270</span><span class="u">ms</span></p>
 </div>
 <p class="body" data-step="2" style="left:128px;top:880px;width:1664px">Stejný běh, stejný server. Liší se jen to, <span class="amber">odkud se počítá čas</span>.</p>`,
-    notes: `A není to jen teorie. Gil Tene napsal nástroj wrk2, který měří správně a umí vypsat i nekorigovaná čísla, takže jde obojí porovnat na jednom běhu. V příkladu z jeho dokumentace běží test třicet sekund při dvou tisících požadavcích za sekundu a během testu se server na 1,4 sekundy pozastaví. Nekorigovaný 99. percentil vyjde šest milisekund. [KLIK] Korigovaný vyjde 1 270 milisekund. To je zhruba dvousetnásobek. [KLIK] Stejný běh, stejný server. Rozdíl je jen v tom, že korigovaná verze počítá čas od chvíle, kdy požadavek MĚL odejít, a ne od chvíle, kdy skutečně odešel. (Nech číslo dvě stě chvíli viset.)`,
+    notes: `Není to jen teorie. Tene napsal nástroj wrk2, který měří správně a umí vypsat i nekorigovaná čísla, takže jde obojí porovnat na jednom běhu. V příkladu z jeho dokumentace se server během třicetisekundového testu na 1,4 sekundy pozastaví. Nekorigovaný 99. percentil vyjde šest milisekund. [KLIK] Korigovaný 1 270 milisekund, zhruba dvěstěkrát víc. [KLIK] Rozdíl je jen v tom, že korigovaná verze počítá čas od chvíle, kdy požadavek MĚL odejít, a ne kdy skutečně odešel.`,
   },
 
   {
@@ -315,7 +315,7 @@ ${[
     cls: 'paper',
     section: '02 · Jak to shrneme',
     tr: 'slide',
-    sec: 55,
+    sec: 50,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:900px">Past 2 · průměr percentilů${cite(1)}</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">Percentily se nedají průměrovat</h2>
@@ -337,7 +337,7 @@ ${[
   <p class="read plum" style="font-size:96px;margin-top:12px"><span data-count>5000</span><span class="u">ms</span></p>
 </div>
 <p class="muted" data-step="1" style="left:128px;top:928px;width:1664px;font-size:22px;line-height:1.3">Předpoklad: stejný provoz každou minutu, ve výpadku trvá každý požadavek 5 s. Pomalých je tedy 1/60 ≈ 1,7 % požadavků, víc než 1 %.</p>`,
-    notes: `Druhá past je zrádnější, protože ji najdete skoro v každém dashboardu. Monitoring spočítá 99. percentil za každou minutu a pro hodinový pohled ho pak zprůměruje. Tady je hodina, kde 59 minut má p99 dvacet milisekund a jedna minuta je výpadek, kdy každý požadavek trvá pět sekund. Pozor, osa je logaritmická. Průměr minutových p99 vyjde 103 milisekund. Vypadá to jako mírné zhoršení, nikdo se nevzbudí. [KLIK] Jenže při rovnoměrném provozu tvoří ta jedna minuta šedesátinu všech požadavků, tedy asi 1,7 procenta. To je víc než jedno procento, takže skutečný 99. percentil za hodinu je pět sekund. Tene to v přednášce říká přímo: percentily průměrovat nejde, taková matematika neexistuje. Pokud potřebujete agregovat přes čas nebo přes servery, slučujte celé histogramy a percentil spočítejte až z nich.`,
+    notes: `Druhou past najdete skoro v každém dashboardu. Monitoring spočítá 99. percentil za každou minutu a pro hodinový pohled ho pak zprůměruje. Tady je hodina, kde 59 minut má p99 dvacet milisekund a jedna minuta je výpadek, kdy každý požadavek trvá pět sekund. Pozor, osa je logaritmická, jinak by dvacet milisekund nebylo vůbec vidět. Průměr minutových p99 vyjde 103 milisekund, mírné zhoršení. [KLIK] Jenže při rovnoměrném provozu tvoří ta jedna minuta šedesátinu všech požadavků, asi 1,7 procenta. To je víc než jedno procento, takže skutečný 99. percentil za hodinu je pět sekund. Tene to říká přímo: percentily průměrovat nejde. Když agregujete přes čas nebo servery, slučujte celé histogramy a percentil spočítejte až z nich.`,
   },
 
   {
@@ -395,7 +395,7 @@ ${[
     cls: 'paper',
     section: '03 · Jak měřit správně',
     tr: 'slide',
-    sec: 85,
+    sec: 75,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:900px">Řešení</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">Dvě opravy měření, dvě opravy shrnutí</h2>
@@ -414,8 +414,9 @@ ${[
   ${code ? `<p class="chip" style="align-self:flex-start;font-size:19px">${code}</p>` : ''}
 </div>`
   )
-  .join('')}`,
-    notes: `Řešení má dvě části: opravit měření a opravit shrnutí. První oprava: zátěž se posílá podle plánu, ne podle odpovědí. Tomu se říká otevřený model. Požadavky přicházejí stálým tempem, stejně jako skuteční uživatelé, kterým je jedno, že server má zrovna problém. Rozdíl mezi otevřeným a uzavřeným modelem popsali už v roce 2006 Schroeder, Wierman a Harchol-Balter. V JMeteru k tomu slouží Open Model Thread Group, která je v něm od verze 5.5. Plánuje příchody požadavků místo počtu souběžných vláken. Podobně to umí k6 s executorem constant-arrival-rate nebo wrk2 s parametrem -R. [KLIK] Druhá oprava: čas se počítá od okamžiku, kdy požadavek MĚL odejít, ne kdy skutečně odešel. Knihovna HdrHistogram navíc umí chybějící vzorky dopočítat, když jí řeknete, jaký byl plánovaný interval mezi požadavky. [KLIK] Třetí: místo jednoho čísla hlásit rozdělení. Medián, devadesátý, devadesátý devátý percentil, tři devítky a maximum. Ideálně celý graf. [KLIK] A čtvrtá: když agregujete přes čas nebo přes servery, slučujte histogramy. Histogramy se dají sčítat, percentily ne.`,
+  .join('')}
+<p class="small" style="left:128px;top:916px;width:1664px"><b>Rychlá kontrola:</b> sedí skutečná propustnost s plánovanou? <span class="muted">(JMeter: Throughput v Summary Reportu)</span> Pokud ne, generátor čekal.</p>`,
+    notes: `Co s tím? Dvě opravy měření a dvě opravy shrnutí. První: zátěž posílat podle plánu, ne podle odpovědí. Tomu se říká otevřený model a popsali ho už v roce 2006 Schroeder, Wierman a Harchol-Balter. V JMeteru ho od verze 5.5 dělá Open Model Thread Group, která plánuje příchody požadavků místo počtu vláken. Podobně to umí k6 nebo wrk2. [KLIK] Druhá: čas počítat od okamžiku, kdy požadavek MĚL odejít. HdrHistogram umí chybějící vzorky dopočítat, když zná plánovaný interval. [KLIK] Třetí: místo jednoho čísla hlásit rozdělení, tedy percentily a maximum. [KLIK] Čtvrtá: při agregaci přes čas nebo servery slučovat histogramy, ne percentily. A nejrychlejší kontrola, kterou můžete udělat hned: sedí skutečná propustnost testu s plánovanou? Pokud generátor poslal méně požadavků, než měl, čekal.`,
   },
 
   {
