@@ -18,10 +18,10 @@
   </table>
 
   <h2>2 · Proč generátor „zpomalí s ním“</h2>
-  <p>Pro uzavřený systém platí <b>zákon interaktivní doby odezvy</b> z operační analýzy (Lazowska a kol., <i>Quantitative System Performance</i>, kap. 3):</p>
+  <p>Pro uzavřený systém platí <b>zákon doby odezvy</b> (Response Time Law) z operační analýzy (Lazowska a kol., <i>Quantitative System Performance</i>, oddíl 3.3). V knize je zapsaný jako R = N/X − Z, tady upravený na propustnost:</p>
   <p class="formula">X = N / (R + Z)</p>
   <p>kde <b>X</b> je propustnost, <b>N</b> počet klientů (vláken), <b>R</b> doba odezvy a <b>Z</b> pauza mezi požadavky. Příklad: 200 vláken, Z = 1 s, R = 5 ms → X ≈ 199 req/s. Když se server zasekne a R vyroste, <mark>X automaticky klesne</mark>: generátor posílá méně požadavků přesně ve chvíli, kdy by měl systém zatěžovat nejvíc. To je mechanismus coordinated omission v jednom vzorci.</p>
-  <p>Příbuzný je <b>Littleův zákon</b> L = λ · W: průměrný počet požadavků v systému = rychlost příchodů × průměrná doba v systému. Platí pro otevřený i uzavřený systém a hodí se na rychlou kontrolu, jestli čísla z testu dávají smysl.</p>
+  <p>Zákon doby odezvy plyne z <b>Littleova zákona</b>, v knize N = X · R (často také L = λ · W): průměrný počet požadavků v systému = propustnost × průměrná doba v systému. Platí pro otevřený i uzavřený systém, pokud je v ustáleném stavu (kolik požadavků přijde, tolik jich odejde), a hodí se na rychlou kontrolu, jestli čísla z testu dávají smysl.</p>
 
   <h2>3 · Jak funguje korekce</h2>
   <ul>
@@ -69,7 +69,7 @@
     <li><b>Dokumentace k6: Open and closed models</b>, stručné vysvětlení s příklady executorů. <span>grafana.com/docs/k6</span></li>
     <li><b>BlazeMeter: Open Model Thread Group</b>, jak nastavit otevřený model v JMeteru. <span>blazemeter.com/blog/open-model-thread-group</span></li>
     <li><b>README knihovny HdrHistogram</b>, záznam s očekávaným intervalem a slučování histogramů. <span>github.com/HdrHistogram/HdrHistogram</span></li>
-    <li><b>E. D. Lazowska a kol.: Quantitative System Performance</b> (1984), kap. 3 o základních zákonech (Littleův zákon, zákon interaktivní doby odezvy). Pro hlubší pochopení, proč se uzavřený systém sám přibrzdí.</li>
+    <li><b>E. D. Lazowska, J. Zahorjan, G. S. Graham, K. C. Sevcik: Quantitative System Performance</b> (1984), kap. 3 Fundamental Laws, oddíl 3.3 (Littleův zákon a zákon doby odezvy). Autoři knihu zdarma zveřejnili online. Pro hlubší pochopení, proč se uzavřený systém sám přibrzdí. <span>homes.cs.washington.edu/~lazowska/qsp</span></li>
   </ol>
 
   <div class="cheat">
