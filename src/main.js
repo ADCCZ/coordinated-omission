@@ -170,7 +170,8 @@ function show(stage, idx, step, { animate = true } = {}) {
 }
 
 function notesHTML(text) {
-  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\[KLIK\]/g, '<span class="klik">KLIK</span>');
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\[KLIK\]/g, '<span class="klik">KLIK</span>')
+    .replace(/==(.+?)==/g, '<mark class="hl">$1</mark>');
 }
 
 // ---------------------------------------------------------------------------

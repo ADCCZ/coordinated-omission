@@ -1,0 +1,81 @@
+<!-- Studijní část na konec SCENAR.pdf. Čistý HTML fragment, styly jsou ve scripts/scenar-pdf.mjs. -->
+<section class="study">
+  <p class="eyebrow">Příloha</p>
+  <h1>Co si nastudovat</h1>
+  <p class="lead">Tahle část se neříká nahlas. Je to podklad, abys rozuměl tomu, co stojí za slidy, a zvládl otázky po referátu.</p>
+
+  <h2>1 · Pojmy v jedné větě</h2>
+  <table class="gloss">
+    <tr><th>Doba odezvy<br><span>response time</span></th><td>Čas od chvíle, kdy klient požadavek odeslal (správně: <em>měl</em> odeslat), do přijetí odpovědi. Zahrnuje <mark>čekání ve frontě i obsluhu</mark>.</td></tr>
+    <tr><th>Doba obsluhy<br><span>service time</span></th><td>Čas, kdy server požadavek skutečně zpracovává. Tohle měří generátor zasažený coordinated omission.</td></tr>
+    <tr><th>Propustnost<br><span>throughput</span></th><td>Počet dokončených požadavků za jednotku času (req/s).</td></tr>
+    <tr><th>Percentil pXX</th><td>Hodnota, pod kterou leží XX % měření. p50 = medián; p99 = jen 1 % požadavků je pomalejší.</td></tr>
+    <tr><th>Ocas rozdělení<br><span>tail</span></th><td>Nejpomalejší odpovědi, typicky nad p99. Průměr a medián o něm nic neřeknou.</td></tr>
+    <tr><th>Uzavřený model<br><span>closed</span></th><td>Pevný počet klientů (vláken); každý pošle další požadavek až po odpovědi, případně po pauze (think time). <mark>Tempo příchodů závisí na serveru.</mark></td></tr>
+    <tr><th>Otevřený model<br><span>open</span></th><td>Požadavky přicházejí podle plánu (rychlostí λ) <mark>nezávisle na tom, jak rychle server odpovídá</mark>. Odpovídá veřejnému webu nebo API.</td></tr>
+    <tr><th>Coordinated omission</th><td>Systematická chyba měření: když systém zpomalí, generátor přestane posílat a měřit požadavky, takže <mark>vynechá právě ty nejhorší vzorky</mark>. Pojem zavedl Gil Tene (Azul Systems).</td></tr>
+    <tr><th>HdrHistogram</th><td>Histogram s velkým rozsahem hodnot a nastavitelnou přesností. Zápis je levný a <mark>histogramy se dají sčítat</mark>, takže jdou slučovat přes čas i servery.</td></tr>
+  </table>
+
+  <h2>2 · Proč generátor „zpomalí s ním“</h2>
+  <p>Pro uzavřený systém platí <b>zákon interaktivní doby odezvy</b> z operační analýzy (Lazowska a kol., <i>Quantitative System Performance</i>, kap. 3):</p>
+  <p class="formula">X = N / (R + Z)</p>
+  <p>kde <b>X</b> je propustnost, <b>N</b> počet klientů (vláken), <b>R</b> doba odezvy a <b>Z</b> pauza mezi požadavky. Příklad: 200 vláken, Z = 1 s, R = 5 ms → X ≈ 199 req/s. Když se server zasekne a R vyroste, <mark>X automaticky klesne</mark>: generátor posílá méně požadavků přesně ve chvíli, kdy by měl systém zatěžovat nejvíc. To je mechanismus coordinated omission v jednom vzorci.</p>
+  <p>Příbuzný je <b>Littleův zákon</b> L = λ · W: průměrný počet požadavků v systému = rychlost příchodů × průměrná doba v systému. Platí pro otevřený i uzavřený systém a hodí se na rychlou kontrolu, jestli čísla z testu dávají smysl.</p>
+
+  <h2>3 · Jak funguje korekce</h2>
+  <ul>
+    <li><b>wrk2</b> s parametrem <code>-R</code> drží konstantní propustnost. Každý požadavek má plánovaný čas odeslání a <mark>latence se počítá od plánu</mark>, ne od skutečného odeslání. Volbou <code>--u_latency</code> vypíše i nekorigovaná čísla pro srovnání.</li>
+    <li><b>HdrHistogram</b> <code>recordValueWithExpectedInterval(hodnota, interval)</code>: když je hodnota větší než očekávaný interval mezi požadavky, doplní navíc hodnoty <i>hodnota − interval</i>, <i>hodnota − 2·interval</i>, … dokud neklesnou pod interval. Příklad z myšlenkového pokusu: interval 10 ms (100 req/s), naměřeno 100 s → doplní se 9 999 hodnot od 99,99 s dolů po 10 ms. To jsou přesně požadavky, které generátor během výpadku nevyslal.</li>
+    <li>Korekce je <mark>odhad</mark>, který předpokládá rovnoměrné příchody. Lepší je měřit rovnou v otevřeném modelu.</li>
+  </ul>
+
+  <h2>4 · Výpočty ze slidů</h2>
+  <table class="calc">
+    <tr><th>Myšlenkový pokus, benchmark</th><td>(10 000 × 1 ms + 1 × 100 000 ms) / 10 001 ≈ 11,0 ms. Tene v přednášce uvádí „10,9 ms“, přesně je to 10,999 ms.</td></tr>
+    <tr><th>Myšlenkový pokus, uživatelé</th><td>10 000 požadavků po 1 ms + 10 000 požadavků čekajících 100 s, 99,99 s, … 0,01 s (průměr ≈ 50 s) → (10 s + 10 000 × 50,005 s) / 20 000 ≈ 25 s. p75 = 15 000. hodnota ≈ 50 s, p99,99 ≈ 100 s.</td></tr>
+    <tr><th>wrk2</th><td>1 270 ms / 6,04 ms ≈ 210 → README uvádí „200x“.</td></tr>
+    <tr><th>Past 1</th><td>0,95 × 10 ms + 0,05 × 810 ms = 9,5 + 40,5 = 50 ms. p99 systému B leží v horních 5 %, tedy 810 ms.</td></tr>
+    <tr><th>Past 2</th><td>(59 × 20 ms + 5 000 ms) / 60 = 6 180 / 60 = 103 ms. Pomalá minuta = 1/60 ≈ 1,67 % požadavků &gt; 1 % → skutečné p99 = 5 s.</td></tr>
+    <tr><th>Past 3</th><td>P(aspoň jeden pomalý z n) = 1 − 0,99ⁿ. n = 10 → 9,6 %, n = 100 → 63,4 %. Předpoklad: servery jsou pomalé nezávisle na sobě.</td></tr>
+  </table>
+
+  <h2>5 · Možné otázky po referátu</h2>
+  <dl class="qa">
+    <dt>Je uzavřený model vždycky špatně?</dt>
+    <dd>Ne. Pokud má reálný systém pevný počet klientů, kteří na odpověď opravdu čekají (dávkové zpracování, pevný počet terminálů), uzavřený model ho popisuje věrně. Problém je, když reálné příchody na rychlosti serveru nezávisí, jako u webu nebo veřejného API. Schroeder, Wierman a Harchol-Balter ukazují, že <mark>volba modelu výrazně mění výsledky</mark>, takže ji musí určovat realita, ne pohodlí nástroje.</dd>
+    <dt>Nestačí v JMeteru přidat Constant Throughput Timer?</dt>
+    <dd>Ne. Timer jen brzdí vlákna na cílovou propustnost. Když server stojí, vlákna dál čekají na odpovědi a nové požadavky neodcházejí. Víc vláken problém zmírní, ale neodstraní. Řešením je <mark>Open Model Thread Group</mark> (JMeter 5.5+) a kontrola skutečné propustnosti proti plánu.</dd>
+    <dt>Proč nehlásit prostě maximum?</dt>
+    <dd>Maximum je důležité a coordinated omission ho obvykle neschová, protože ten jeden pomalý vzorek se zapíše. Neřekne ale, <i>jak často</i> se to děje: jeden výpadek za den, nebo polovina požadavků? Proto <mark>percentily a maximum dohromady</mark>.</dd>
+    <dt>Jak dostanu p99 za hodinu, když mám uložené jen minutové p99?</dt>
+    <dd>Přesně nijak, z percentilů se zpět rozdělení nesložíš. Je potřeba ukládat <mark>histogramy</mark> (HdrHistogram, případně přibližné struktury jako t-digest), sloučit je a percentil spočítat až z výsledku.</dd>
+    <dt>Proč se v myšlenkovém pokusu nezměnil medián?</dt>
+    <dd>Polovina všech požadavků (prvních 100 s) je rychlá, takže medián leží přesně na hranici a zůstane na 1 ms. Medián o horší polovině neříká vůbec nic.</dd>
+    <dt>Jak poznám coordinated omission ve výsledcích?</dt>
+    <dd>Nejrychleji: <mark>skutečná propustnost je nižší než plánovaná</mark> (v JMeteru Throughput v Summary Reportu). Dále „díry“ v časové ose vzorků v době, kdy systém zpomalil.</dd>
+    <dt>Dá se s ocasem u fan-outu něco dělat?</dt>
+    <dd>Dean a Barroso navrhují mimo jiné <b>hedged requests</b>: když odpověď nepřijde do očekávaného p95, pošle se stejný požadavek ještě jiné replice a použije se ta rychlejší odpověď. Zátěž to zvýší jen asi o 5 % a ocas výrazně zkrátí.</dd>
+    <dt>Týká se to jen nástrojů na zátěžové testy?</dt>
+    <dd>Ne. Vznikne všude, kde měřicí smyčka čeká na měřený systém: v mikrobenchmarcích, v klientovi, který si měří vlastní volání, nebo v monitoringu, který vidí jen dokončené požadavky.</dd>
+  </dl>
+
+  <h2>6 · Doporučené studium</h2>
+  <ol class="reading">
+    <li><b>Gil Tene: How NOT to Measure Latency</b> (přednáška, slidy z QCon SF 2012, přepis na Amara). Základ celého referátu: coordinated omission, percentily, HdrHistogram. <span>qconsf.com/sf2012 · amara.org/videos/0vqzbDPNIIbE</span></li>
+    <li><b>README nástroje wrk2</b>, část o coordinated omission a příklad s pozastavením serveru přes Ctrl+Z. <span>github.com/giltene/wrk2</span></li>
+    <li><b>J. Dean, L. A. Barroso: The Tail at Scale</b> (Communications of the ACM, 2013). Krátký článek o ocasu latence ve velkých systémech a technikách proti němu. <span>doi.org/10.1145/2408776.2408794</span></li>
+    <li><b>B. Schroeder, A. Wierman, M. Harchol-Balter: Open Versus Closed: A Cautionary Tale</b> (NSDI 2006). Kdy použít otevřený a kdy uzavřený model. <span>usenix.org/conference/nsdi-06</span></li>
+    <li><b>Dokumentace k6: Open and closed models</b>, stručné vysvětlení s příklady executorů. <span>grafana.com/docs/k6</span></li>
+    <li><b>BlazeMeter: Open Model Thread Group</b>, jak nastavit otevřený model v JMeteru. <span>blazemeter.com/blog/open-model-thread-group</span></li>
+    <li><b>README knihovny HdrHistogram</b>, záznam s očekávaným intervalem a slučování histogramů. <span>github.com/HdrHistogram/HdrHistogram</span></li>
+    <li><b>E. D. Lazowska a kol.: Quantitative System Performance</b> (1984), kap. 3 o základních zákonech (Littleův zákon, zákon interaktivní doby odezvy). Pro hlubší pochopení, proč se uzavřený systém sám přibrzdí.</li>
+  </ol>
+
+  <div class="cheat">
+    <p class="eyebrow">Tahák na kartičku</p>
+    <p><b>Měření:</b> posílat podle plánu · čas od plánovaného odeslání · kontrolovat propustnost.</p>
+    <p><b>Shrnutí:</b> percentily + maximum · nikdy neprůměrovat percentily · slučovat histogramy.</p>
+    <p><b>Tři otázky ke grafu:</b> Odkud se počítá čas? Je to průměr? Jak se agregovalo?</p>
+  </div>
+</section>

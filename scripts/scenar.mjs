@@ -2,43 +2,30 @@
 // Spuštění: npm run scenar
 import { writeFileSync } from 'node:fs';
 import { slides } from '../src/slides.js';
+import { titles } from './titles.mjs';
 
 const pad = (n) => String(n).padStart(2, '0');
 const mmss = (s) => `${Math.floor(s / 60)}:${pad(s % 60)}`;
-const titles = {
-  cover: 'Úvod',
-  teze: 'Teze',
-  d1: 'Předěl: Co měříme',
-  smycka: 'Uzavřená smyčka',
-  definice: 'Definice',
-  pokus: 'Myšlenkový pokus: 100 s běží, 100 s stojí',
-  nasobek: 'wrk2: 200×',
-  d2: 'Předěl: Jak to shrneme',
-  past1: 'Past 1: stejný průměr, jiný svět',
-  past2: 'Past 2: percentily se nedají průměrovat',
-  past3: 'Past 3: fan-out (The Tail at Scale)',
-  d3: 'Předěl: Jak měřit správně',
-  reseni: 'Řešení: dvě opravy měření, dvě opravy shrnutí',
-  zaver: 'Závěr',
-  zdroje: 'Zdroje a poděkování',
-};
+
 
 const total = slides.reduce((a, s) => a + s.sec, 0);
-const words = slides.reduce((a, s) => a + s.notes.split(/\s+/).length, 0);
+const words = slides.reduce((a, s) => a + s.notes.replace(/==/g, '').split(/\s+/).length, 0);
 let t = 0;
 let md = `# Coordinated Omission a pasti průměrných časů: text k přednesu
 
-Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Švehla
+Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
+
+Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
 Plánovaná délka **${mmss(total)}** (${words} slov, zhruba 130 slov za minutu).
-**[KLIK]** znamená posun na další krok (šipka → nebo mezerník).
+\`[KLIK]\` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
 `;
 slides.forEach((s, i) => {
   md += `## ${pad(i + 1)} · ${titles[s.id] || s.id}\n\n`;
   md += `*${mmss(t)}–${mmss(t + s.sec)} · cca ${s.sec} s*\n\n`;
-  md += `${s.notes.replace(/\[KLIK\]/g, '**[KLIK]**')}\n\n`;
+  md += `${s.notes.replace(/==(.+?)==/g, '**$1**').replace(/\[KLIK\]/g, '`[KLIK]`')}\n\n`;
   t += s.sec;
 });
 md += `---\n\nTento soubor se generuje ze \`src/slides.js\` příkazem \`npm run scenar\`. Text upravuj tam.\n`;

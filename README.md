@@ -2,7 +2,9 @@
 
 Referát z předmětu **KIV/PTE – Pokročilé testování** (ZČU FAV), cca 10 minut. Webová prezentace ve stylu „měřicího protokolu“ (milimetrový papír, tmavé displeje, Fraunces + IBM Plex): 15 slidů, krokované odhalování, přechody mezi slidy, načítající se čísla a režim řečníka s textem k přednesu.
 
-Text k přednesu je v [`SCENAR.md`](SCENAR.md).
+Autor: Oldřich Jan Švehla.
+
+Text k přednesu je v [`SCENAR.pdf`](SCENAR.pdf) (se zvýrazněnými klíčovými větami, náhledy slidů a studijní přílohou) a v [`SCENAR.md`](SCENAR.md).
 
 ## Ovládání
 
@@ -27,7 +29,8 @@ Přechody: běžné slidy se posouvají, předěly kapitol se odkryjí „sníma
 npm install
 npm run dev      # http://localhost:5173
 npm run build    # výstup do dist/
-npm run scenar   # přegeneruje SCENAR.md z poznámek ve src/slides.js
+npm run scenar      # přegeneruje SCENAR.md z poznámek ve src/slides.js
+npm run scenar:pdf  # po buildu vygeneruje SCENAR.pdf (potřebuje Playwright s Chromiem)
 ```
 
 Obsah slidů i poznámky jsou v `src/slides.js`, logika v `src/main.js`, vzhled v `src/style.css`.

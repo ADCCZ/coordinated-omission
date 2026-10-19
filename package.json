@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "scenar": "node scripts/scenar.mjs"
+    "scenar": "node scripts/scenar.mjs",
+    "scenar:pdf": "node scripts/scenar-pdf.mjs"
   },
   "devDependencies": {
     "vite": "5.4.11"

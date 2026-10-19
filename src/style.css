@@ -354,3 +354,6 @@ body.print { overflow: visible; background: #fff; }
 @media (max-width: 760px) {
   .hint { display: none; }
 }
+
+/* zvýraznění klíčových vět v poznámkách */
+mark.hl { background: rgba(242, 179, 61, 0.28); color: inherit; border-bottom: 2px solid var(--amber); padding: 0 2px; }
