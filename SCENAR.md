@@ -4,7 +4,7 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **8:45** (704 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
+Plánovaná délka **9:00** (730 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
@@ -42,7 +42,7 @@ Tene říká, že se systém a měřič nechtěně sladí: **když zpomalí syst
 
 *3:05–4:20 · cca 75 s*
 
-Tene to ukazuje na pokusu. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože **99. percentil je hodnota, pod kterou leží 99 procent měření**, jeden pomalý vzorek z deseti tisíc s ním nepohne: **i 99,99. percentil je milisekunda**. `[KLIK]` Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků a **v průměru by čekaly padesát sekund**. Celkový průměr je tak asi **pětadvacet sekund**. Medián zůstane na milisekundě, protože rychlá je pořád polovina. `[KLIK]` **Server je v obou sloupcích stejný. Liší se jen měření.**
+Tene to ukazuje na pokusu. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože **99. percentil, zkráceně p99, je hodnota, pod kterou leží 99 procent měření**, jeden pomalý vzorek z deseti tisíc s ním nepohne: **i 99,99. percentil je milisekunda**. `[KLIK]` Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků a **v průměru by čekaly padesát sekund**. Celkový průměr je tak asi **pětadvacet sekund**. Medián zůstane na milisekundě, protože rychlá je pořád polovina. `[KLIK]` **Server je v obou sloupcích stejný. Liší se jen měření.**
 
 ## 07 · wrk2: 200×
 
@@ -88,13 +88,13 @@ Dvě opravy měření a dvě opravy shrnutí. První: **posílat zátěž podle 
 
 ## 14 · Závěr
 
-*8:10–8:35 · cca 25 s*
+*8:10–8:50 · cca 40 s*
 
-Server byl ve všech příkladech stejný. **Číslo je jen tak dobré jako způsob, jakým vzniklo.** Takže u každého grafu latence: `[KLIK]` Odkud se počítá čas? `[KLIK]` Je to průměr? `[KLIK]` A jak se data sčítala?
+Server byl ve všech příkladech stejný. **Číslo je jen tak dobré jako způsob, jakým vzniklo.** Takže u každého grafu latence: `[KLIK]` Odkud se počítá čas? **Má se počítat od plánovaného odeslání, ne od skutečného.** `[KLIK]` Je to průměr? **Pak chtějte percentily a maximum.** `[KLIK]` A jak se data sčítala? **Pokud někdo průměroval percentily, číslo neplatí. Sčítat se mají histogramy.**
 
 ## 15 · Zdroje a poděkování
 
-*8:35–8:45 · cca 10 s*
+*8:50–9:00 · cca 10 s*
 
 Zdroje jsou tady i online. Děkuji za pozornost a rád odpovím na otázky.
 

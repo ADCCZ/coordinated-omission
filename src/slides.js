@@ -250,7 +250,7 @@ export const slides = [
   <tr><td>99,99. percentil</td><td class="v"><span data-count>1</span> ms</td><td class="v col-u nomove" data-step="1">≈ <span data-count>100</span> s</td></tr>
 </table>
 <p class="body" data-step="2" style="left:128px;top:900px;width:1664px"><span class="mark">Server je v obou sloupcích stejný.</span> Liší se jen způsob měření.</p>`,
-    notes: `Tene to ukazuje na pokusu. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože ==99. percentil je hodnota, pod kterou leží 99 procent měření==, jeden pomalý vzorek z deseti tisíc s ním nepohne: ==i 99,99. percentil je milisekunda==. [KLIK] Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků a ==v průměru by čekaly padesát sekund==. Celkový průměr je tak asi ==pětadvacet sekund==. Medián zůstane na milisekundě, protože rychlá je pořád polovina. [KLIK] ==Server je v obou sloupcích stejný. Liší se jen měření.==`,
+    notes: `Tene to ukazuje na pokusu. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože ==99. percentil, zkráceně p99, je hodnota, pod kterou leží 99 procent měření==, jeden pomalý vzorek z deseti tisíc s ním nepohne: ==i 99,99. percentil je milisekunda==. [KLIK] Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků a ==v průměru by čekaly padesát sekund==. Celkový průměr je tak asi ==pětadvacet sekund==. Medián zůstane na milisekundě, protože rychlá je pořád polovina. [KLIK] ==Server je v obou sloupcích stejný. Liší se jen měření.==`,
   },
 
   {
@@ -431,7 +431,7 @@ ${[
     cls: 'dark',
     section: 'Závěr',
     tr: 'zoom',
-    sec: 25,
+    sec: 40,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:1200px">Závěr · tři otázky ke každému grafu latence</p>
 <h2 class="display" data-split style="left:124px;top:206px;width:1600px;font-size:104px;line-height:1.02;letter-spacing:-2px">Číslo je jen tak dobré jako způsob, jakým vzniklo.</h2>
@@ -449,7 +449,7 @@ ${[
 </div>`
   )
   .join('')}`,
-    notes: `Server byl ve všech příkladech stejný. ==Číslo je jen tak dobré jako způsob, jakým vzniklo.== Takže u každého grafu latence: [KLIK] Odkud se počítá čas? [KLIK] Je to průměr? [KLIK] A jak se data sčítala?`,
+    notes: `Server byl ve všech příkladech stejný. ==Číslo je jen tak dobré jako způsob, jakým vzniklo.== Takže u každého grafu latence: [KLIK] Odkud se počítá čas? ==Má se počítat od plánovaného odeslání, ne od skutečného.== [KLIK] Je to průměr? ==Pak chtějte percentily a maximum.== [KLIK] A jak se data sčítala? ==Pokud někdo průměroval percentily, číslo neplatí. Sčítat se mají histogramy.==`,
   },
 
   {
