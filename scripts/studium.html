@@ -13,6 +13,7 @@
     <tr><th>Ocas rozdělení<br><span>tail</span></th><td>Nejpomalejší odpovědi, typicky nad p99. Průměr a medián o něm nic neřeknou.</td></tr>
     <tr><th>Uzavřený model<br><span>closed</span></th><td>Pevný počet klientů (vláken); každý pošle další požadavek až po odpovědi, případně po pauze (think time). <mark>Tempo příchodů závisí na serveru.</mark></td></tr>
     <tr><th>Otevřený model<br><span>open</span></th><td>Požadavky přicházejí podle plánu (rychlostí λ) <mark>nezávisle na tom, jak rychle server odpovídá</mark>. Odpovídá veřejnému webu nebo API.</td></tr>
+    <tr><th>JMeter · Thread Group</th><td>Apache JMeter je open-source nástroj na zátěžové testy. <b>Thread Group</b> je základní prvek testovacího plánu: určuje počet vláken (virtuálních uživatelů), náběh (ramp-up) a počet opakování nebo dobu běhu. Každé vlákno prochází plán postupně a <mark>další požadavek pošle až po odpovědi na předchozí</mark>, je to tedy uzavřený model.</td></tr>
     <tr><th>Coordinated omission</th><td>Systematická chyba měření: když systém zpomalí, generátor přestane posílat a měřit požadavky, takže <mark>vynechá právě ty nejhorší vzorky</mark>. Pojem zavedl Gil Tene (Azul Systems).</td></tr>
     <tr><th>HdrHistogram</th><td>Histogram s velkým rozsahem hodnot a nastavitelnou přesností. Zápis je levný a <mark>histogramy se dají sčítat</mark>, takže jdou slučovat přes čas i servery.</td></tr>
   </table>
