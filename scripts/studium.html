@@ -12,7 +12,7 @@
     <tr><th>Percentil pXX</th><td>Hodnota, pod kterou leží XX % měření. p50 = medián; p99 = jen 1 % požadavků je pomalejší.</td></tr>
     <tr><th>Ocas rozdělení<br><span>tail</span></th><td>Nejpomalejší odpovědi, typicky nad p99. Průměr a medián o něm nic neřeknou.</td></tr>
     <tr><th>Uzavřený model<br><span>closed</span></th><td>Pevný počet klientů (vláken); každý pošle další požadavek až po odpovědi, případně po pauze (think time). <mark>Tempo příchodů závisí na serveru.</mark></td></tr>
-    <tr><th>Otevřený model<br><span>open</span></th><td>Požadavky přicházejí podle plánu (rychlostí λ) <mark>nezávisle na tom, jak rychle server odpovídá</mark>. Odpovídá veřejnému webu nebo API.</td></tr>
+    <tr><th>Otevřený model<br><span>open</span></th><td>Požadavky přicházejí s průměrnou rychlostí λ (v článku Schroeder a kol. náhodně, Poissonovým procesem) <mark>nezávisle na tom, jak rychle server odpovídá</mark>. Podle stejného článku není úplně realistický ani jeden model: web nejlépe popisuje <b>částečně otevřený</b> model (partly-open), kde uživatelé přicházejí nezávisle, ale během návštěvy čekají na odpovědi.</td></tr>
     <tr><th>JMeter · Thread Group</th><td>Apache JMeter je open-source nástroj na zátěžové testy. <b>Thread Group</b> je základní prvek testovacího plánu: určuje počet vláken (virtuálních uživatelů), náběh (ramp-up) a počet opakování nebo dobu běhu. Každé vlákno prochází plán postupně a <mark>další požadavek pošle až po odpovědi na předchozí</mark>, je to tedy uzavřený model.</td></tr>
     <tr><th>wrk2 · k6</th><td>Nástroje na zátěžové testy. <b>wrk2</b> je Teneho úprava nástroje wrk pro HTTP: drží konstantní propustnost (<code>-R</code>) a měří od plánovaného času odeslání. <b>k6</b> (Grafana) píše testy v JavaScriptu a otevřený model nabízí přes executory <code>constant-arrival-rate</code> a <code>ramping-arrival-rate</code>.</td></tr>
     <tr><th>Fan-out</th><td>Jeden dotaz uživatele se rozdělí na mnoho paralelních volání dalších serverů a odpověď je hotová, až když dorazí ta nejpomalejší. Proto se <mark>vzácný ocas jednoho serveru stane běžným zážitkem uživatele</mark>.</td></tr>
@@ -35,7 +35,7 @@
 
   <h2>4 · Výpočty ze slidů</h2>
   <table class="calc">
-    <tr><th>Myšlenkový pokus, benchmark</th><td>(10 000 × 1 ms + 1 × 100 000 ms) / 10 001 ≈ 11,0 ms. Tene v přednášce uvádí „10,9 ms“, přesně je to 10,999 ms.</td></tr>
+    <tr><th>Myšlenkový pokus, benchmark</th><td>(10 000 × 1 ms + 1 × 100 000 ms) / 10 001 ≈ 11,0 ms. Tene na slidu uvádí „10.9 msec“, přesně je to 10,999 ms.</td></tr>
     <tr><th>Myšlenkový pokus, uživatelé</th><td>10 000 požadavků po 1 ms + 10 000 požadavků čekajících 100 s, 99,99 s, … 0,01 s (průměr ≈ 50 s) → (10 s + 10 000 × 50,005 s) / 20 000 ≈ 25 s. p75 = 15 000. hodnota ≈ 50 s, p99,99 ≈ 100 s.</td></tr>
     <tr><th>wrk2</th><td>1 270 ms / 6,04 ms ≈ 210 → README uvádí „200x“.</td></tr>
     <tr><th>Past 1</th><td>0,95 × 10 ms + 0,05 × 810 ms = 9,5 + 40,5 = 50 ms. p99 systému B leží v horních 5 %, tedy 810 ms.</td></tr>
@@ -46,7 +46,7 @@
   <h2>5 · Možné otázky po referátu</h2>
   <dl class="qa">
     <dt>Je uzavřený model vždycky špatně?</dt>
-    <dd>Ne. Pokud má reálný systém pevný počet klientů, kteří na odpověď opravdu čekají (dávkové zpracování, pevný počet terminálů), uzavřený model ho popisuje věrně. Problém je, když reálné příchody na rychlosti serveru nezávisí, jako u webu nebo veřejného API. Schroeder, Wierman a Harchol-Balter ukazují, že <mark>volba modelu výrazně mění výsledky</mark>, takže ji musí určovat realita, ne pohodlí nástroje.</dd>
+    <dd>Ne. Pokud má reálný systém pevný počet klientů, kteří na odpověď opravdu čekají (dávkové zpracování, pevný počet terminálů), uzavřený model ho popisuje věrně. Problém je, když reálné příchody na rychlosti serveru nezávisí. Schroeder, Wierman a Harchol-Balter ukazují, že <mark>volba modelu výrazně mění výsledky</mark> (průměrná doba odezvy se při stejné zátěži může lišit o řád i víc) a že většina generátorů zátěže a benchmarků přitom používá uzavřený model. Web podle nich leží mezi oběma modely, jako částečně otevřený systém. Volbu modelu tedy musí určovat realita, ne pohodlí nástroje.</dd>
     <dt>Nestačí v JMeteru přidat Constant Throughput Timer?</dt>
     <dd>Ne. Timer jen brzdí vlákna na cílovou propustnost. Když server stojí, vlákna dál čekají na odpovědi a nové požadavky neodcházejí. Víc vláken problém zmírní, ale neodstraní. Řešením je <mark>Open Model Thread Group</mark> (JMeter 5.5+) a kontrola skutečné propustnosti proti plánu.</dd>
     <dt>Proč nehlásit prostě maximum?</dt>

@@ -4,7 +4,7 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **9:45** (1247 slov, zhruba 130 slov za minutu).
+Plánovaná délka **9:45** (1249 slov, zhruba 130 slov za minutu).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
@@ -36,13 +36,13 @@ Většina nástrojů na zátěžové testy funguje **v takzvané uzavřené smy�
 
 *2:40–3:20 · cca 40 s*
 
-Tene tomu říká coordinated omission, protože se měřený systém a měřicí nástroj nechtěně sladí: **když zpomalí systém, zpomalí i měření a přestane se ptát**. `[KLIK]` Představte si anketu spokojenosti, kde se ptáte jen lidí, kteří odcházejí od přepážky. Když se přepážka na hodinu zavře, nikdo neodchází, a tak si nikdo nestěžuje. Fronta venku se do výsledků vůbec nedostane. `[KLIK]` Test pak měří hlavně dobu obsluhy, service time: jak dlouho trvalo vyřídit požadavek, když na něj přišla řada. Jenže **uživatel zažívá dobu odezvy, response time, a to je čekání ve frontě plus obsluha**.
+Tene tomu říká coordinated omission, protože se měřený systém a měřicí nástroj nechtěně sladí: **když zpomalí systém, zpomalí i měření a přestane se ptát**. `[KLIK]` Představte si anketu spokojenosti, kde se ptáte jen lidí, kteří odcházejí od přepážky. Když se přepážka na hodinu zavře, nikdo neodchází, a tak si nikdo nestěžuje. Fronta venku se do výsledků vůbec nedostane. `[KLIK]` V jazyce teorie front: test pak měří hlavně dobu obsluhy, service time: jak dlouho trvalo vyřídit požadavek, když na něj přišla řada. Jenže **uživatel zažívá dobu odezvy, response time, a to je čekání ve frontě plus obsluha**.
 
 ## 06 · Myšlenkový pokus: 100 s běží, 100 s stojí
 
 *3:20–4:50 · cca 90 s*
 
-Jak velký ten rozdíl může být? Tene má na to myšlenkový pokus. Systém sto sekund odpovídá za jednu milisekundu, sto požadavků za sekundu. Pak ho na sto sekund zmrazíme, v terminálu stačí Ctrl+Z. Nástroj v uzavřené smyčce nasbírá deset tisíc rychlých vzorků a jeden, který trvá sto sekund. Průměr mu vyjde necelých jedenáct milisekund. Připomenu, co je percentil: **99. percentil je hodnota, pod kterou leží 99 procent měření**, takže jen jeden požadavek ze sta je pomalejší. Náš pomalý vzorek je jeden z víc než deseti tisíc, a tak **i 99,99. percentil ukáže jednu milisekundu**. Vypadá to jako skvělý systém. `[KLIK]` Kdyby ale lidé chodili dál podle plánu, přišlo by během zmrazení dalších deset tisíc požadavků. Kdo přišel na začátku, čeká sto sekund, kdo na konci, skoro nic, **takže v průměru padesát sekund**. Polovina všech požadavků je rychlá a polovina čeká v průměru padesát sekund, proto **celkový průměr vychází asi na pětadvacet sekund**. 75. percentil padne doprostřed té pomalé poloviny, na padesát sekund, a 99,99. percentil skoro na sto. Medián leží přesně na hranici obou polovin, a tak zůstane kolem milisekundy. `[KLIK]` Všimněte si, že **server je v obou sloupcích stejný. Liší se jen způsob měření.**
+Jak velký ten rozdíl může být? Tene má na to myšlenkový pokus. Systém sto sekund odpovídá za jednu milisekundu, sto požadavků za sekundu. Pak se systém na sto sekund úplně zastaví. Nástroj v uzavřené smyčce nasbírá deset tisíc rychlých vzorků a jeden, který trvá sto sekund. Průměr mu vyjde necelých jedenáct milisekund. Připomenu, co je percentil: **99. percentil je hodnota, pod kterou leží 99 procent měření**, takže jen jeden požadavek ze sta je pomalejší. Náš pomalý vzorek je jeden z víc než deseti tisíc, a tak **i 99,99. percentil ukáže jednu milisekundu**. Vypadá to jako skvělý systém. `[KLIK]` Kdyby ale lidé chodili dál podle plánu, přišlo by během zmrazení dalších deset tisíc požadavků. Kdo přišel na začátku, čeká sto sekund, kdo na konci, skoro nic, **takže v průměru padesát sekund**. Polovina všech požadavků je rychlá a polovina čeká v průměru padesát sekund, proto **celkový průměr vychází asi na pětadvacet sekund**. 75. percentil padne doprostřed té pomalé poloviny, na padesát sekund, a 99,99. percentil skoro na sto. Medián leží přesně na hranici obou polovin, a tak zůstane kolem milisekundy. `[KLIK]` Všimněte si, že **server je v obou sloupcích stejný. Liší se jen způsob měření.**
 
 ## 07 · wrk2: 200×
 
