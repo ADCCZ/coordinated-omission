@@ -233,7 +233,7 @@ export const slides = [
     cls: 'paper',
     section: '01 · Co měříme',
     tr: 'slide',
-    sec: 65,
+    sec: 90,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:900px">Myšlenkový pokus · Gil Tene${cite('1,8')}</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">100 s běží, 100 s stojí</h2>
@@ -250,7 +250,7 @@ export const slides = [
   <tr><td>99,99. percentil</td><td class="v"><span data-count>1</span> ms</td><td class="v col-u nomove" data-step="1">≈ <span data-count>100</span> s</td></tr>
 </table>
 <p class="body" data-step="2" style="left:128px;top:900px;width:1664px"><span class="mark">Server je v obou sloupcích stejný.</span> Liší se jen způsob měření.</p>`,
-    notes: `Jak velký to má dopad? Tene ve své přednášce používá myšlenkový pokus. Systém sto sekund odpovídá za jednu milisekundu při sto požadavcích za sekundu. Pak ho na sto sekund zmrazíme, třeba přes Ctrl+Z. Generátor v uzavřené smyčce nasbírá deset tisíc rychlých vzorků a jeden vzorek o délce sto sekund. Průměr vyjde necelých jedenáct milisekund a ==i 99,99. percentil ukazuje jednu milisekundu==. Skvělý systém. [KLIK] Kdyby ale uživatelé chodili dál podle plánu, během zmrazení by přišlo dalších deset tisíc požadavků a čekaly by v průměru padesát sekund. ==Průměr přes dvě stě sekund je pak asi pětadvacet sekund==, 75. percentil padesát a 99,99. percentil sto sekund. Medián je pořád kolem milisekundy, takže ani ten nepomůže. [KLIK] ==Server je v obou sloupcích stejný. Liší se jen způsob měření==.`,
+    notes: `Jak velký to má dopad? Tene ve své přednášce používá myšlenkový pokus. Systém sto sekund odpovídá za jednu milisekundu při sto požadavcích za sekundu. Pak ho na sto sekund zmrazíme, třeba přes Ctrl+Z. Generátor v uzavřené smyčce nasbírá deset tisíc rychlých vzorků a jeden vzorek o délce sto sekund. Průměr vyjde necelých jedenáct milisekund. Připomenu, co je percentil: ==99. percentil je hodnota, pod kterou leží 99 procent měření==, takže jen jeden požadavek ze sta je pomalejší. Ten jediný pomalý vzorek je tu jeden z více než deseti tisíc, a proto ==i 99,99. percentil ukazuje jednu milisekundu==. Skvělý systém. [KLIK] Kdyby ale uživatelé chodili dál podle plánu, během zmrazení by přišlo dalších deset tisíc požadavků. Kdo přišel na začátku, čeká sto sekund, kdo na konci, skoro nic, ==takže v průměru padesát sekund==. Polovina všech požadavků je tedy rychlá a polovina čeká v průměru padesát sekund, proto ==celkový průměr vychází asi na pětadvacet sekund==. Pomalé požadavky tvoří horní polovinu pořadí, takže 75. percentil padne doprostřed nich, na padesát sekund, a 99,99. percentil skoro na sto. Medián leží přesně na hranici mezi rychlou a pomalou polovinou, takže zůstane kolem milisekundy a nepomůže. [KLIK] ==Server je v obou sloupcích stejný. Liší se jen způsob měření==.`,
   },
 
   {
@@ -258,7 +258,7 @@ export const slides = [
     cls: 'dark',
     section: '01 · Co měříme',
     tr: 'zoom',
-    sec: 30,
+    sec: 32,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:1600px">wrk2 · 2 000 req/s · 30 s · server pozastaven na 1,4 s${cite(2)}</p>
 <p class="read amber" style="left:118px;top:205px;width:1664px;font-size:340px;letter-spacing:-16px">~<span data-count>200</span>×</p>
@@ -271,7 +271,7 @@ export const slides = [
   <p class="read" style="font-size:110px;margin-top:18px;color:${C.plumLight}"><span data-count>1270</span><span class="u">ms</span></p>
 </div>
 <p class="body" data-step="2" style="left:128px;top:880px;width:1664px">Stejný běh, stejný server. Liší se jen to, <span class="amber">odkud se počítá čas</span>.</p>`,
-    notes: `Není to jen teorie. Tene napsal nástroj wrk2, který měří správně a umí vypsat i nekorigovaná čísla, takže jde obojí porovnat na jednom běhu. V příkladu z jeho dokumentace se server během třicetisekundového testu na 1,4 sekundy pozastaví. ==Nekorigovaný 99. percentil vyjde šest milisekund==. [KLIK] ==Korigovaný 1 270 milisekund, zhruba dvěstěkrát víc==. [KLIK] Rozdíl je jen v tom, že korigovaná verze ==počítá čas od chvíle, kdy požadavek MĚL odejít==, a ne kdy skutečně odešel.`,
+    notes: `Není to jen teorie. Tene napsal wrk2, nástroj na zátěžové testy HTTP, který měří správně a umí vypsat i nekorigovaná čísla, takže jde obojí porovnat na jednom běhu. V příkladu z jeho dokumentace se server během třicetisekundového testu na 1,4 sekundy pozastaví. ==Nekorigovaný 99. percentil vyjde šest milisekund==. [KLIK] ==Korigovaný 1 270 milisekund, zhruba dvěstěkrát víc==. [KLIK] Rozdíl je jen v tom, že korigovaná verze ==počítá čas od chvíle, kdy požadavek MĚL odejít==, a ne kdy skutečně odešel.`,
   },
 
   {
@@ -384,7 +384,7 @@ ${[
 </svg>
 </div>
 <p class="body" data-step="2" style="left:128px;top:880px;width:1664px">Medián ani p99 jednoho serveru neřekne, co zažije uživatel. <span class="mark">Rozhoduje ocas.</span></p>`,
-    notes: `Třetí past: díváme se na jeden server, ale uživatel čeká na mnoho. Jeff Dean a Luiz Barroso z Googlu to popsali v článku The Tail at Scale. Představte si server, který obvykle odpoví za deset milisekund, ale jeho 99. percentil je jedna sekunda. Jeden požadavek ze sta tedy trvá sekundu nebo déle. Pro jednotlivé volání je to jedno procento, ocas, který v průměru zmizí. [KLIK] Jenže jeden dotaz uživatele se ve velkém systému často rozpadne na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí ta nejpomalejší. Když dotaz čeká na sto takových serverů, pravděpodobnost, že aspoň jeden bude pomalý, je ==jedna minus 0,99 na stou, tedy 63 procent==. [KLIK] Co je na jednom serveru vzácný ocas, je pro uživatele běžný zážitek. Proto u latence nestačí sledovat průměr ani medián. ==Rozhoduje ocas==.`,
+    notes: `Třetí past: díváme se na jeden server, ale uživatel čeká na mnoho. Jeff Dean a Luiz Barroso z Googlu to popsali v článku The Tail at Scale. Představte si server, který obvykle odpoví za deset milisekund, ale jeho 99. percentil je jedna sekunda. Jeden požadavek ze sta tedy trvá sekundu nebo déle. Pro jednotlivé volání je to jedno procento, ocas, který v průměru zmizí. [KLIK] Jenže jeden dotaz uživatele se ve velkém systému často rozpadne na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí ta nejpomalejší. Když dotaz čeká na sto takových serverů, šance, že budou všechny rychlé, je 0,99 na stou, tedy asi 37 procent. Pravděpodobnost, že aspoň jeden bude pomalý, je ==jedna minus 0,99 na stou, tedy 63 procent==. [KLIK] Co je na jednom serveru vzácný ocas, je pro uživatele běžný zážitek. Proto u latence nestačí sledovat průměr ani medián. ==Rozhoduje ocas==.`,
   },
 
   {
@@ -402,13 +402,13 @@ ${[
     cls: 'paper',
     section: '03 · Jak měřit správně',
     tr: 'slide',
-    sec: 75,
+    sec: 80,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:900px">Řešení</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">Dvě opravy měření, dvě opravy shrnutí</h2>
 ${[
   ['01 · MĚŘENÍ', 'Posílej podle plánu, ne podle odpovědí', `Otevřený model: požadavky přicházejí stálým tempem bez ohledu na to, jak rychle server odpovídá.${cite('5,6,9')}`, 'JMeter 5.5+: Open Model Thread Group<br>k6: executor: constant-arrival-rate<br>wrk2: wrk -t2 -c100 -d30s -R2000 …'],
-  ['02 · MĚŘENÍ', 'Počítej čas od plánovaného odeslání', `Latence = konec − okamžik, kdy požadavek <i>měl</i> odejít. HdrHistogram umí chybějící vzorky dopočítat, když zná plánovaný interval.${cite('2,7')}`, 'recordValueWithExpectedInterval()'],
+  ['02 · MĚŘENÍ', 'Počítej čas od plánovaného odeslání', `Latence = konec − okamžik, kdy požadavek <i>měl</i> odejít. Knihovna HdrHistogram, která zaznamenává latence do histogramu, umí chybějící vzorky dopočítat, když zná plánovaný interval.${cite('2,7')}`, 'recordValueWithExpectedInterval()'],
   ['03 · SHRNUTÍ', 'Hlas rozdělení, ne jedno číslo', `p50, p90, p99, p99,9 a maximum. Nejlépe celý graf percentilů.${cite(1)}`, ''],
   ['04 · SHRNUTÍ', 'Slučuj histogramy, ne percentily', `Histogramy se dají sčítat přes čas i servery. Percentil se počítá až z výsledku.${cite(7)}`, ''],
 ]
@@ -423,7 +423,7 @@ ${[
   )
   .join('')}
 <p class="small" style="left:128px;top:916px;width:1664px"><b>Rychlá kontrola:</b> sedí skutečná propustnost s plánovanou? <span class="muted">(JMeter: Throughput v Summary Reportu)</span> Pokud ne, generátor čekal.</p>`,
-    notes: `Co s tím? Dvě opravy měření a dvě opravy shrnutí. První: ==zátěž posílat podle plánu, ne podle odpovědí==. Tomu se říká otevřený model a popsali ho už v roce 2006 Schroeder, Wierman a Harchol-Balter. V JMeteru ho od verze 5.5 dělá ==Open Model Thread Group==, která plánuje příchody požadavků místo počtu vláken. Podobně to umí k6 nebo wrk2. [KLIK] Druhá: ==čas počítat od okamžiku, kdy požadavek MĚL odejít==. HdrHistogram umí chybějící vzorky dopočítat, když zná plánovaný interval. [KLIK] Třetí: místo jednoho čísla ==hlásit rozdělení, tedy percentily a maximum==. [KLIK] Čtvrtá: při agregaci přes čas nebo servery ==slučovat histogramy, ne percentily==. A nejrychlejší kontrola, kterou můžete udělat hned: ==sedí skutečná propustnost testu s plánovanou==? Pokud generátor poslal méně požadavků, než měl, čekal.`,
+    notes: `Co s tím? Dvě opravy měření a dvě opravy shrnutí. První: ==zátěž posílat podle plánu, ne podle odpovědí==. Tomu se říká otevřený model a popsali ho už v roce 2006 Schroeder, Wierman a Harchol-Balter. V JMeteru ho od verze 5.5 dělá ==Open Model Thread Group==, která plánuje příchody požadavků místo počtu vláken. Podobně to umí nástroj k6 nebo wrk2. [KLIK] Druhá: ==čas počítat od okamžiku, kdy požadavek MĚL odejít==. Knihovna HdrHistogram, která zaznamenává latence do histogramu, umí chybějící vzorky dopočítat, když zná plánovaný interval. [KLIK] Třetí: místo jednoho čísla ==hlásit rozdělení, tedy percentily a maximum==. [KLIK] Čtvrtá: při agregaci přes čas nebo servery ==slučovat histogramy, ne percentily==. A nejrychlejší kontrola, kterou můžete udělat hned: ==sedí skutečná propustnost testu s plánovanou==? Propustnost je počet požadavků za sekundu. Pokud generátor poslal méně požadavků, než měl, čekal.`,
   },
 
   {

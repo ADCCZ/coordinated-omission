@@ -14,8 +14,10 @@
     <tr><th>Uzavřený model<br><span>closed</span></th><td>Pevný počet klientů (vláken); každý pošle další požadavek až po odpovědi, případně po pauze (think time). <mark>Tempo příchodů závisí na serveru.</mark></td></tr>
     <tr><th>Otevřený model<br><span>open</span></th><td>Požadavky přicházejí podle plánu (rychlostí λ) <mark>nezávisle na tom, jak rychle server odpovídá</mark>. Odpovídá veřejnému webu nebo API.</td></tr>
     <tr><th>JMeter · Thread Group</th><td>Apache JMeter je open-source nástroj na zátěžové testy. <b>Thread Group</b> je základní prvek testovacího plánu: určuje počet vláken (virtuálních uživatelů), náběh (ramp-up) a počet opakování nebo dobu běhu. Každé vlákno prochází plán postupně a <mark>další požadavek pošle až po odpovědi na předchozí</mark>, je to tedy uzavřený model.</td></tr>
+    <tr><th>wrk2 · k6</th><td>Nástroje na zátěžové testy. <b>wrk2</b> je Teneho úprava nástroje wrk pro HTTP: drží konstantní propustnost (<code>-R</code>) a měří od plánovaného času odeslání. <b>k6</b> (Grafana) píše testy v JavaScriptu a otevřený model nabízí přes executory <code>constant-arrival-rate</code> a <code>ramping-arrival-rate</code>.</td></tr>
+    <tr><th>Fan-out</th><td>Jeden dotaz uživatele se rozdělí na mnoho paralelních volání dalších serverů a odpověď je hotová, až když dorazí ta nejpomalejší. Proto se <mark>vzácný ocas jednoho serveru stane běžným zážitkem uživatele</mark>.</td></tr>
     <tr><th>Coordinated omission</th><td>Systematická chyba měření: když systém zpomalí, generátor přestane posílat a měřit požadavky, takže <mark>vynechá právě ty nejhorší vzorky</mark>. Pojem zavedl Gil Tene (Azul Systems).</td></tr>
-    <tr><th>HdrHistogram</th><td>Histogram s velkým rozsahem hodnot a nastavitelnou přesností. Zápis je levný a <mark>histogramy se dají sčítat</mark>, takže jdou slučovat přes čas i servery.</td></tr>
+    <tr><th>HdrHistogram</th><td>Knihovna, která zaznamenává latence do histogramu s velkým rozsahem hodnot a nastavitelnou přesností. Histogram jsou jen počty měření v jednotlivých intervalech, a proto <mark>se histogramy dají sčítat</mark>: sečtou se počty a percentil se spočítá až z výsledku. Percentily samotné takhle sčítat ani průměrovat nejde.</td></tr>
   </table>
 
   <h2>2 · Proč generátor „zpomalí s ním“</h2>
