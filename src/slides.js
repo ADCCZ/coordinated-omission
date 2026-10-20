@@ -250,7 +250,7 @@ export const slides = [
   <tr><td>99,99. percentil</td><td class="v"><span data-count>1</span> ms</td><td class="v col-u nomove" data-step="1">≈ <span data-count>100</span> s</td></tr>
 </table>
 <p class="body" data-step="2" style="left:128px;top:900px;width:1664px"><span class="mark">Server je v obou sloupcích stejný.</span> Liší se jen způsob měření.</p>`,
-    notes: `Tene to ukazuje na pokusu. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože ==99. percentil, zkráceně p99, je hodnota, pod kterou leží 99 procent měření==, jeden pomalý vzorek z deseti tisíc s ním nepohne: ==i 99,99. percentil je milisekunda==. [KLIK] Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků a ==v průměru by čekaly padesát sekund==. Celkový průměr je tak asi ==pětadvacet sekund==. Medián zůstane na milisekundě, protože rychlá je pořád polovina. [KLIK] ==Server je v obou sloupcích stejný. Liší se jen měření.==`,
+    notes: `Tene to ukazuje na pokusu. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože ==99. percentil je hodnota, pod kterou leží 99 procent měření==, jeden pomalý vzorek z deseti tisíc s ním nepohne: ==i 99,99. percentil je milisekunda==. [KLIK] Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků a ==v průměru by čekaly padesát sekund==. Celkový průměr je tak asi ==pětadvacet sekund==. Medián zůstane na milisekundě, protože rychlá je pořád polovina. [KLIK] ==Server je v obou sloupcích stejný. Liší se jen měření.==`,
   },
 
   {
@@ -344,7 +344,7 @@ ${[
   <p class="read plum" style="font-size:96px;margin-top:12px"><span data-count>5000</span><span class="u">ms</span></p>
 </div>
 <p class="muted" data-step="1" style="left:128px;top:928px;width:1664px;font-size:22px;line-height:1.3">Předpoklad: stejný provoz každou minutu, ve výpadku trvá každý požadavek 5 s. Pomalých je tedy 1/60 ≈ 1,7 % požadavků, víc než 1 %.</p>`,
-    notes: `Druhá past je skoro v každém dashboardu: p99 za každou minutu a pak jejich průměr za hodinu. Tady má 59 minut dvacet milisekund a jedna minuta pět sekund. Pozor, osa je logaritmická. Průměr vyjde 103 milisekund. [KLIK] Jenže ta minuta je šedesátina provozu, asi 1,7 procenta, tedy víc než jedno procento. ==Skutečný 99. percentil je pět sekund.== Tene to říká jasně: ==percentily průměrovat nejde==. Sčítat se mají histogramy.`,
+    notes: `Druhá past je skoro v každém dashboardu: 99. percentil za každou minutu a pak jejich průměr za hodinu. Tady má 59 minut dvacet milisekund a jedna minuta pět sekund. Pozor, osa je logaritmická. Průměr vyjde 103 milisekund. [KLIK] Jenže ta minuta je šedesátina provozu, asi 1,7 procenta, tedy víc než jedno procento. ==Skutečný 99. percentil je pět sekund.== Tene to říká jasně: ==percentily průměrovat nejde==. Sčítat se mají histogramy.`,
   },
 
   {

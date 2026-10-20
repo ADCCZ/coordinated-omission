@@ -4,7 +4,7 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **9:00** (730 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
+Plánovaná délka **9:00** (729 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
@@ -42,7 +42,7 @@ Tene říká, že se systém a měřič nechtěně sladí: **když zpomalí syst
 
 *3:05–4:20 · cca 75 s*
 
-Tene to ukazuje na pokusu. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože **99. percentil, zkráceně p99, je hodnota, pod kterou leží 99 procent měření**, jeden pomalý vzorek z deseti tisíc s ním nepohne: **i 99,99. percentil je milisekunda**. `[KLIK]` Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků a **v průměru by čekaly padesát sekund**. Celkový průměr je tak asi **pětadvacet sekund**. Medián zůstane na milisekundě, protože rychlá je pořád polovina. `[KLIK]` **Server je v obou sloupcích stejný. Liší se jen měření.**
+Tene to ukazuje na pokusu. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože **99. percentil je hodnota, pod kterou leží 99 procent měření**, jeden pomalý vzorek z deseti tisíc s ním nepohne: **i 99,99. percentil je milisekunda**. `[KLIK]` Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků a **v průměru by čekaly padesát sekund**. Celkový průměr je tak asi **pětadvacet sekund**. Medián zůstane na milisekundě, protože rychlá je pořád polovina. `[KLIK]` **Server je v obou sloupcích stejný. Liší se jen měření.**
 
 ## 07 · wrk2: 200×
 
@@ -66,7 +66,7 @@ První je samotný průměr. Systém A odpoví vždy za padesát milisekund. Sys
 
 *5:45–6:35 · cca 50 s*
 
-Druhá past je skoro v každém dashboardu: p99 za každou minutu a pak jejich průměr za hodinu. Tady má 59 minut dvacet milisekund a jedna minuta pět sekund. Pozor, osa je logaritmická. Průměr vyjde 103 milisekund. `[KLIK]` Jenže ta minuta je šedesátina provozu, asi 1,7 procenta, tedy víc než jedno procento. **Skutečný 99. percentil je pět sekund.** Tene to říká jasně: **percentily průměrovat nejde**. Sčítat se mají histogramy.
+Druhá past je skoro v každém dashboardu: 99. percentil za každou minutu a pak jejich průměr za hodinu. Tady má 59 minut dvacet milisekund a jedna minuta pět sekund. Pozor, osa je logaritmická. Průměr vyjde 103 milisekund. `[KLIK]` Jenže ta minuta je šedesátina provozu, asi 1,7 procenta, tedy víc než jedno procento. **Skutečný 99. percentil je pět sekund.** Tene to říká jasně: **percentily průměrovat nejde**. Sčítat se mají histogramy.
 
 ## 11 · Past 3: fan-out (The Tail at Scale)
 
