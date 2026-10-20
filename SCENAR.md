@@ -4,7 +4,7 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **9:35** (1223 slov, zhruba 130 slov za minutu).
+Plánovaná délka **9:35** (1230 slov, zhruba 130 slov za minutu).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
@@ -30,7 +30,7 @@ Začněme tím, co vlastně měříme.
 
 *1:25–2:35 · cca 70 s*
 
-Většina klasických nástrojů pro zátěžové testy **funguje v takzvané uzavřené smyčce**. Tak funguje i běžná Thread Group v JMeteru, tedy skupina vláken, ve které každé vlákno hraje jednoho virtuálního uživatele. Každé vlákno pošle požadavek, počká na odpověď, zapíše, jak dlouho to trvalo, a teprve potom pošle další. Horní řada ukazuje, kdy jsme chtěli požadavky posílat, třeba sto za sekundu. Dokud server odpovídá rychle, spodní řada plán věrně kopíruje. `[KLIK]` Teď se server na chvíli zasekne, třeba kvůli garbage collectoru, zámku v databázi nebo přetížené síti. Požadavek, který zrovna běží, čeká, a generátor čeká s ním. Až odpověď dorazí, zapíše se jeden pomalý vzorek. `[KLIK]` A tady je ten problém. Všechny tyhle požadavky měly během zaseknutí odejít, ale generátor je neposlal, protože čekal. **Kdo je neposlal, ten je ani nezměřil**. Z celého výpadku tak v datech zůstane **jediný pomalý vzorek mezi stovkami rychlých**.
+Většina klasických nástrojů pro zátěžové testy **funguje v takzvané uzavřené smyčce**. Tak funguje i JMeter, open-source nástroj na zátěžové testy od Apache. Jeho běžná Thread Group je skupina vláken, ve které každé vlákno hraje jednoho virtuálního uživatele. Každé vlákno pošle požadavek, počká na odpověď, zapíše, jak dlouho to trvalo, a teprve potom pošle další. Horní řada ukazuje, kdy jsme chtěli požadavky posílat, třeba sto za sekundu. Dokud server odpovídá rychle, spodní řada plán věrně kopíruje. `[KLIK]` Teď se server na chvíli zasekne, třeba kvůli garbage collectoru, zámku v databázi nebo přetížené síti. Požadavek, který zrovna běží, čeká, a generátor čeká s ním. Až odpověď dorazí, zapíše se jeden pomalý vzorek. `[KLIK]` A tady je ten problém. Všechny tyhle požadavky měly během zaseknutí odejít, ale generátor je neposlal, protože čekal. **Kdo je neposlal, ten je ani nezměřil**. Z celého výpadku tak v datech zůstane **jediný pomalý vzorek mezi stovkami rychlých**.
 
 ## 05 · Definice
 
