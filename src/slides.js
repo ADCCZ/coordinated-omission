@@ -44,7 +44,7 @@ const traceBase = 930;
 // během výpadku (1080–1380) uzavřená smyčka nic nezapíše → mezera v datech
 const traceA = [];
 const traceB = [];
-for (let x = 0; x <= 1920; x += 12) {
+for (let x = 84; x <= 1860; x += 12) {
   const y = traceBase - 10 - rnd() * 26;
   if (x < 1080) traceA.push(`${x},${y.toFixed(1)}`);
   else if (x === 1080) traceA.push(`${x},640`); // jediný pomalý vzorek
@@ -99,14 +99,21 @@ export const slides = [
     id: 'cover',
     cls: 'dark',
     head: false,
-    sec: 30,
+    sec: 35,
     html: `
 <svg aria-label="Naměřená latence: rovná čára s jediným pomalým vzorkem; přerušovaně skutečná doba čekání během výpadku" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080">
   <rect x="1080" y="620" width="300" height="340" fill="${C.plumLight}" fill-opacity=".10"/>
   <polyline points="1080,640 1380,${traceBase - 22}" fill="none" stroke="${C.plumLight}" stroke-width="4" stroke-dasharray="10 9"/>
   <polyline class="draw" style="--len:1700" points="${traceA.join(' ')}" fill="none" stroke="${C.amber}" stroke-width="3.5" stroke-linejoin="round"/>
   <polyline class="draw" style="--len:1200" points="${traceB.join(' ')}" fill="none" stroke="${C.amber}" stroke-width="3.5" stroke-linejoin="round"/>
-  <text x="1230" y="${traceBase + 40}" text-anchor="middle" fill="${C.onDarkMuted}" font-size="19" letter-spacing="1.5" ${MONO}>ŽÁDNÁ DATA</text>
+  <text x="1230" y="${traceBase + 18}" text-anchor="middle" fill="${C.onDarkMuted}" font-size="19" letter-spacing="1.5" ${MONO}>ŽÁDNÁ DATA</text>
+  <g stroke="${C.onDarkMuted}" stroke-opacity=".6" stroke-width="2" fill="none">
+    <polyline points="64,600 64,968 1880,968"/>
+    <polyline points="56,614 64,600 72,614"/>
+    <polyline points="1866,960 1880,968 1866,976"/>
+  </g>
+  <text transform="translate(48 960) rotate(-90)" fill="${C.onDarkMuted}" font-size="19" letter-spacing="1.5" ${MONO}>DOBA ODEZVY →</text>
+  <text x="1880" y="952" text-anchor="end" fill="${C.onDarkMuted}" font-size="19" letter-spacing="1.5" ${MONO}>ČAS ODESLÁNÍ →</text>
   <text x="1104" y="612" fill="${C.plumLight}" font-size="22" letter-spacing="1.5" ${MONO}>ZAŽITO UŽIVATELI</text>
   <text x="128" y="890" fill="${C.amber}" font-size="22" letter-spacing="1.5" ${MONO}>NAMĚŘENO</text>
 </svg>
@@ -116,7 +123,7 @@ export const slides = [
 <p class="body" style="left:128px;top:490px;width:900px;color:${C.onDarkMuted}">Proč benchmark ukazuje rychlý systém, který uživatelé zažívají jako pomalý.</p>
 <p class="label" style="left:128px;top:990px;width:800px;color:${C.onDark}">Oldřich Jan Švehla</p>
 <p class="label right" style="left:992px;top:990px;width:800px">Pojem: Gil Tene, Azul Systems${cite(1)}</p>`,
-    notes: `Dobrý den. Když děláme benchmark nebo zátěžový test, jednou z hlavních metrik je doba odezvy. Dnes vám ukážu, ==proč naměřená doba odezvy často lže, i když nikdo nic nefalšuje==. Příčiny jsou dvě. ==První je coordinated omission==, česky koordinované vynechání. Ten pojem zavedl Gil Tene ze společnosti Azul Systems. ==Druhou jsou průměry==, a obecně to, jak z tisíců měření uděláme jedno číslo. Graf na pozadí je celý problém v malém: měřič zapsal jediný pomalý vzorek a během výpadku pak nezapsal nic. Růžově je to, co mezitím zažili uživatelé.`,
+    notes: `Dobrý den. Když děláme benchmark nebo zátěžový test, jednou z hlavních metrik je doba odezvy. Dnes vám ukážu, ==proč naměřená doba odezvy často lže, i když nikdo nic nefalšuje==. Příčiny jsou dvě. ==První je coordinated omission==, česky koordinované vynechání. Ten pojem zavedl Gil Tene ze společnosti Azul Systems. ==Druhou jsou průměry==, a obecně to, jak z tisíců měření uděláme jedno číslo. Graf na pozadí je celý problém v malém. Vodorovně je čas, svisle doba odezvy. ==Měřič zapsal jediný pomalý vzorek a během výpadku pak nezapsal nic.== Růžově je to, co mezitím zažili uživatelé: kdo přišel na začátku výpadku, čekal celou dobu, kdo těsně před koncem, skoro nic.`,
   },
 
   {
