@@ -4,99 +4,99 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **10:07** (1336 slov, zhruba 130 slov za minutu).
+Plánovaná délka **9:45** (1247 slov, zhruba 130 slov za minutu).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
 ## 01 · Úvod
 
-*0:00–0:35 · cca 35 s*
+*0:00–0:55 · cca 55 s*
 
-Dobrý den. Když děláme benchmark nebo zátěžový test, jednou z hlavních metrik je doba odezvy. Dnes vám ukážu, **proč naměřená doba odezvy často lže, i když nikdo nic nefalšuje**. Příčiny jsou dvě. **První je coordinated omission**, česky koordinované vynechání. Ten pojem zavedl Gil Tene ze společnosti Azul Systems. **Druhou jsou průměry**, a obecně to, jak z tisíců měření uděláme jedno číslo. Graf na pozadí je celý problém v malém. Vodorovně je čas, svisle doba odezvy. **Měřič zapsal jediný pomalý vzorek a během výpadku pak nezapsal nic.** Růžově je to, co mezitím zažili uživatelé: kdo přišel na začátku výpadku, čekal celou dobu, kdo těsně před koncem, skoro nic.
+Dobrý den. U zátěžového testu nás většinou nejvíc zajímá doba odezvy. A já vám chci ukázat, **že tohle číslo umí lhát, i když ho nikdo nefalšuje**. Důvody jsou dva. Prvnímu se říká **coordinated omission**, česky koordinované vynechání. Pojem zavedl Gil Tene z firmy Azul Systems. Ten druhý znáte všichni: **jsou to průměry**, tedy jak z tisíců měření uděláme jedno číslo. Graf na pozadí ukazuje celý problém ve zjednodušené podobě. Na vodorovné ose je čas odeslání požadavku, na svislé doba odezvy. Žlutá čára je to, co naměřil testovací nástroj: **jeden pomalý vzorek a pak během výpadku nic**. Růžově je to, co mezitím zažili uživatelé. Kdo přišel na začátku výpadku, čekal celou dobu, kdo přišel těsně před koncem, skoro nic.
 
 ## 02 · Teze
 
-*0:35–1:20 · cca 45 s*
+*0:55–1:30 · cca 35 s*
 
-Hned na začátek hlavní myšlenka. **Coordinated omission je chyba v tom, CO naměříte**. Měřicí nástroj zpomalí přesně ve chvíli, kdy zpomalí systém, a většina nejhorších okamžiků se do dat vůbec nedostane. To jsou ty prázdné kroužky vlevo. **Průměr je chyba v tom, JAK naměřené shrnete**. I s dokonalými daty jedno číslo schová ocas rozdělení, tedy ty nejpomalejší odpovědi vpravo. A právě ty si uživatelé pamatují. `[KLIK]` Takže: **první chyba kazí data, druhá kazí závěry**. A nejhorší je, když se potkají obě najednou.
+Coordinated omission je **chyba v tom, co naměříte**. Měřicí nástroj se zasekne ve stejnou chvíli jako systém, a většina nejhorších okamžiků se tak do dat vůbec nedostane. To jsou ty prázdné kroužky na obrázku vlevo. Průměr je zase **chyba v tom, jak naměřené shrnete**. I kdyby byla data v pořádku, jedno číslo neřekne nic o nejpomalejších odpovědích, tedy o tom ocasu na obrázku vpravo. A právě ty si uživatelé pamatují. `[KLIK]` Zkráceně: **první chyba kazí data, druhá kazí závěry**.
 
 ## 03 · Předěl: Co měříme
 
-*1:20–1:25 · cca 5 s*
+*1:30–1:35 · cca 5 s*
 
-Začněme tím, co vlastně měříme.
+Začnu tím měřením.
 
 ## 04 · Uzavřená smyčka
 
-*1:25–2:35 · cca 70 s*
+*1:35–2:40 · cca 65 s*
 
-Většina klasických nástrojů pro zátěžové testy **funguje v takzvané uzavřené smyčce**. Tak funguje i JMeter, open-source nástroj na zátěžové testy od Apache. Jeho běžná Thread Group je skupina vláken, ve které každé vlákno hraje jednoho virtuálního uživatele. Každé vlákno pošle požadavek, počká na odpověď, zapíše, jak dlouho to trvalo, a teprve potom pošle další. Horní řada ukazuje, kdy jsme chtěli požadavky posílat, třeba sto za sekundu. Dokud server odpovídá rychle, spodní řada plán věrně kopíruje. `[KLIK]` Teď se server na chvíli zasekne, třeba kvůli garbage collectoru, zámku v databázi nebo přetížené síti. Požadavek, který zrovna běží, čeká, a generátor čeká s ním. Až odpověď dorazí, zapíše se jeden pomalý vzorek. `[KLIK]` A tady je ten problém. Všechny tyhle požadavky měly během zaseknutí odejít, ale generátor je neposlal, protože čekal. **Kdo je neposlal, ten je ani nezměřil**. Z celého výpadku tak v datech zůstane **jediný pomalý vzorek mezi stovkami rychlých**.
+Většina nástrojů na zátěžové testy funguje **v takzvané uzavřené smyčce**. Třeba JMeter, open-source nástroj na zátěžové testy od Apache: v jeho běžné Thread Group hraje každé vlákno jednoho virtuálního uživatele. Vlákno pošle požadavek, počká na odpověď, zapíše si, jak dlouho to trvalo, a teprve potom pošle další. Horní řada ukazuje plán, třeba sto požadavků za sekundu. Dokud server odpovídá rychle, spodní řada ho přesně kopíruje. `[KLIK]` Teď se server na chvíli zasekne, třeba kvůli garbage collectoru nebo zámku v databázi. Požadavek, který zrovna běží, čeká, a vlákno čeká s ním. Když odpověď konečně přijde, zapíše se jeden pomalý vzorek. `[KLIK]` A tady je háček. Tyhle požadavky měly během zaseknutí odejít, jenže vlákno čekalo, a tak je nikdo neposlal. **A co nikdo neposlal, to nikdo nezměřil.** Z celého výpadku tak v datech zbude **jeden pomalý vzorek mezi stovkami rychlých**.
 
 ## 05 · Definice
 
-*2:35–3:20 · cca 45 s*
+*2:40–3:20 · cca 40 s*
 
-Gil Tene tomu říká coordinated omission. Měřený systém a měřicí nástroj se nevědomky sladí: **když systém zpomalí, měřič zpomalí s ním a přestane se ptát**. `[KLIK]` Je to jako anketa spokojenosti, kterou dělá někdo, kdo se ptá jen lidí odcházejících od přepážky. Když se přepážka na hodinu zavře, nikdo neodchází, a tedy si nikdo nestěžuje. Fronta venku do statistiky vůbec nevstoupí. `[KLIK]` Výsledek pak popisuje hlavně dobu obsluhy, anglicky service time, tedy jak dlouho trvalo vyřídit požadavek, když na něj přišla řada. **Uživatel ale zažívá dobu odezvy, response time: čekání ve frontě plus obsluhu**.
+Tene tomu říká coordinated omission, protože se měřený systém a měřicí nástroj nechtěně sladí: **když zpomalí systém, zpomalí i měření a přestane se ptát**. `[KLIK]` Představte si anketu spokojenosti, kde se ptáte jen lidí, kteří odcházejí od přepážky. Když se přepážka na hodinu zavře, nikdo neodchází, a tak si nikdo nestěžuje. Fronta venku se do výsledků vůbec nedostane. `[KLIK]` Test pak měří hlavně dobu obsluhy, service time: jak dlouho trvalo vyřídit požadavek, když na něj přišla řada. Jenže **uživatel zažívá dobu odezvy, response time, a to je čekání ve frontě plus obsluha**.
 
 ## 06 · Myšlenkový pokus: 100 s běží, 100 s stojí
 
 *3:20–4:50 · cca 90 s*
 
-Jak velký to má dopad? Tene ve své přednášce používá myšlenkový pokus. Systém sto sekund odpovídá za jednu milisekundu při sto požadavcích za sekundu. Pak ho na sto sekund zmrazíme, třeba přes Ctrl+Z. Generátor v uzavřené smyčce nasbírá deset tisíc rychlých vzorků a jeden vzorek o délce sto sekund. Průměr vyjde necelých jedenáct milisekund. Připomenu, co je percentil: **99. percentil je hodnota, pod kterou leží 99 procent měření**, takže jen jeden požadavek ze sta je pomalejší. Ten jediný pomalý vzorek je tu jeden z více než deseti tisíc, a proto **i 99,99. percentil ukazuje jednu milisekundu**. Skvělý systém. `[KLIK]` Kdyby ale uživatelé chodili dál podle plánu, během zmrazení by přišlo dalších deset tisíc požadavků. Kdo přišel na začátku, čeká sto sekund, kdo na konci, skoro nic, **takže v průměru padesát sekund**. Polovina všech požadavků je tedy rychlá a polovina čeká v průměru padesát sekund, proto **celkový průměr vychází asi na pětadvacet sekund**. Pomalé požadavky tvoří horní polovinu pořadí, takže 75. percentil padne doprostřed nich, na padesát sekund, a 99,99. percentil skoro na sto. Medián leží přesně na hranici mezi rychlou a pomalou polovinou, takže zůstane kolem milisekundy a nepomůže. `[KLIK]` **Server je v obou sloupcích stejný. Liší se jen způsob měření**.
+Jak velký ten rozdíl může být? Tene má na to myšlenkový pokus. Systém sto sekund odpovídá za jednu milisekundu, sto požadavků za sekundu. Pak ho na sto sekund zmrazíme, v terminálu stačí Ctrl+Z. Nástroj v uzavřené smyčce nasbírá deset tisíc rychlých vzorků a jeden, který trvá sto sekund. Průměr mu vyjde necelých jedenáct milisekund. Připomenu, co je percentil: **99. percentil je hodnota, pod kterou leží 99 procent měření**, takže jen jeden požadavek ze sta je pomalejší. Náš pomalý vzorek je jeden z víc než deseti tisíc, a tak **i 99,99. percentil ukáže jednu milisekundu**. Vypadá to jako skvělý systém. `[KLIK]` Kdyby ale lidé chodili dál podle plánu, přišlo by během zmrazení dalších deset tisíc požadavků. Kdo přišel na začátku, čeká sto sekund, kdo na konci, skoro nic, **takže v průměru padesát sekund**. Polovina všech požadavků je rychlá a polovina čeká v průměru padesát sekund, proto **celkový průměr vychází asi na pětadvacet sekund**. 75. percentil padne doprostřed té pomalé poloviny, na padesát sekund, a 99,99. percentil skoro na sto. Medián leží přesně na hranici obou polovin, a tak zůstane kolem milisekundy. `[KLIK]` Všimněte si, že **server je v obou sloupcích stejný. Liší se jen způsob měření.**
 
 ## 07 · wrk2: 200×
 
-*4:50–5:22 · cca 32 s*
+*4:50–5:25 · cca 35 s*
 
-Není to jen teorie. Tene napsal wrk2, nástroj na zátěžové testy HTTP, který měří správně a umí vypsat i nekorigovaná čísla, takže jde obojí porovnat na jednom běhu. V příkladu z jeho dokumentace se server během třicetisekundového testu na 1,4 sekundy pozastaví. **Nekorigovaný 99. percentil vyjde šest milisekund**. `[KLIK]` **Korigovaný 1 270 milisekund, zhruba dvěstěkrát víc**. `[KLIK]` Rozdíl je jen v tom, že korigovaná verze **počítá čas od chvíle, kdy požadavek MĚL odejít**, a ne kdy skutečně odešel.
+Není to jen teorie. Tene napsal wrk2, nástroj na zátěžové testy HTTP, který vypíše čísla s korekcí i bez ní. V příkladu z jeho dokumentace se server během třicetisekundového testu na 1,4 sekundy pozastaví. **Bez korekce vyjde 99. percentil šest milisekund.** `[KLIK]` **S korekcí 1 270 milisekund**, zhruba dvěstěkrát víc. `[KLIK]` Jediný rozdíl je v tom, odkud se počítá čas. Verze s korekcí ho **počítá od chvíle, kdy požadavek měl odejít**, ne od chvíle, kdy skutečně odešel.
 
 ## 08 · Předěl: Jak to shrneme
 
-*5:22–5:32 · cca 10 s*
+*5:25–5:35 · cca 10 s*
 
-Teď předpokládejme, že měříme správně a data máme v pořádku. Pořád je musíme nějak shrnout do čísla, které někomu ukážeme. A tady čekají tři pasti.
+Řekněme, že už měříme správně. Data ale pořád musíme shrnout do čísla, které někomu ukážeme. A tady čekají tři pasti.
 
 ## 09 · Past 1: stejný průměr, jiný svět
 
-*5:32–6:17 · cca 45 s*
+*5:35–6:15 · cca 40 s*
 
-První past: průměr nic neříká o tvaru rozdělení. Systém A odpoví na každý požadavek za padesát milisekund. Systém B odpoví na 95 procent požadavků za deset milisekund a na zbylých pět procent za 810 milisekund. Spočítejte si to: 0,95 krát 10 plus 0,05 krát 810 je přesně padesát. **Oba mají stejný průměr**. `[KLIK]` Ale **99. percentil systému B je 810 milisekund**, šestnáctkrát víc než u systému A. Latence v reálných systémech obvykle nemá tvar Gaussova zvonu. Mívá dlouhý ocas doprava a často víc vrcholů, takže průměr ani směrodatná odchylka její tvar nepopíšou. **Proto se hlásí percentily a maximum, ne jedno číslo**.
+První past je samotný průměr. Systém A odpoví na každý požadavek za padesát milisekund. Systém B odpoví v 95 procentech případů za deset milisekund a ve zbylých pěti procentech za 810. Když si to spočítáte, 0,95 krát 10 plus 0,05 krát 810 je přesně padesát. **Oba systémy mají stejný průměr.** `[KLIK]` Jenže **99. percentil systému B je 810 milisekund**, protože nejhorší procento leží v těch pomalých pěti procentech. To je šestnáctkrát víc než u systému A. **Proto se hlásí percentily a maximum, ne jedno číslo.**
 
 ## 10 · Past 2: percentily se nedají průměrovat
 
-*6:17–7:07 · cca 50 s*
+*6:15–7:10 · cca 55 s*
 
-Druhou past najdete skoro v každém dashboardu. Monitoring spočítá 99. percentil za každou minutu a pro hodinový pohled ho pak zprůměruje. Tady je hodina, kde 59 minut má p99 dvacet milisekund a jedna minuta je výpadek, kdy každý požadavek trvá pět sekund. **Pozor, osa je logaritmická**, jinak by dvacet milisekund nebylo vůbec vidět. Průměr minutových p99 vyjde 103 milisekund, mírné zhoršení. `[KLIK]` Jenže při rovnoměrném provozu tvoří ta jedna minuta šedesátinu všech požadavků, asi 1,7 procenta. To je víc než jedno procento, takže **skutečný 99. percentil za hodinu je pět sekund**. Tene to říká přímo: **percentily průměrovat nejde**. Když agregujete přes čas nebo servery, **slučujte celé histogramy** a percentil spočítejte až z nich.
+Druhou past najdete skoro v každém dashboardu. Monitoring spočítá 99. percentil za každou minutu a pro hodinový pohled je zprůměruje. Tady je taková hodina: 59 minut má p99 dvacet milisekund a jedna minuta je výpadek, kdy každý požadavek trvá pět sekund. **Pozor, osa je logaritmická**, jinak by dvacet milisekund vedle pěti sekund nebylo vidět. Průměr minutových p99 vyjde 103 milisekund, tedy mírné zhoršení. `[KLIK]` Jenže při stejném provozu je ta minuta šedesátina všech požadavků, asi 1,7 procenta. To je víc než jedno procento, a proto **skutečný 99. percentil za hodinu je pět sekund**. Tene to říká přímo: **percentily se průměrovat nedají**. Když sčítáte přes čas nebo přes servery, **slučujte celé histogramy** a percentil spočítejte až z nich.
 
 ## 11 · Past 3: fan-out (The Tail at Scale)
 
-*7:07–7:57 · cca 50 s*
+*7:10–8:05 · cca 55 s*
 
-Třetí past: díváme se na jeden server, ale uživatel čeká na mnoho. Jeff Dean a Luiz Barroso z Googlu to popsali v článku The Tail at Scale. Představte si server, který obvykle odpoví za deset milisekund, ale jeho 99. percentil je jedna sekunda. Jeden požadavek ze sta tedy trvá sekundu nebo déle. Pro jednotlivé volání je to jedno procento, ocas, který v průměru zmizí. `[KLIK]` Jenže jeden dotaz uživatele se ve velkém systému často rozpadne na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí ta nejpomalejší. Když dotaz čeká na sto takových serverů, šance, že budou všechny rychlé, je 0,99 na stou, tedy asi 37 procent. Pravděpodobnost, že aspoň jeden bude pomalý, je **jedna minus 0,99 na stou, tedy 63 procent**. `[KLIK]` Co je na jednom serveru vzácný ocas, je pro uživatele běžný zážitek. Proto u latence nestačí sledovat průměr ani medián. **Rozhoduje ocas**.
+Třetí past popsali Jeff Dean a Luiz Barroso z Googlu v článku The Tail at Scale: díváme se na jeden server, ale uživatel čeká na mnoho serverů najednou. Vezměte server, jehož 99. percentil je jedna sekunda, takže jeden požadavek ze sta trvá sekundu nebo víc. `[KLIK]` Jeden dotaz uživatele se ale ve velkém systému rozpadne na desítky až stovky paralelních volání a hotovo je, až když dorazí to nejpomalejší. Když dotaz čeká na sto takových serverů, šance, že budou všechny rychlé, je 0,99 na stou, asi 37 procent. Pravděpodobnost, že aspoň jeden bude pomalý, je tedy **jedna minus 0,99 na stou, tedy 63 procent**. `[KLIK]` Co je na jednom serveru vzácnost, je pro uživatele běžný zážitek. **Rozhoduje ocas.**
 
 ## 12 · Předěl: Jak měřit správně
 
-*7:57–8:02 · cca 5 s*
+*8:05–8:10 · cca 5 s*
 
-Co s tím tedy dělat?
+Tak co s tím?
 
 ## 13 · Řešení: dvě opravy měření, dvě opravy shrnutí
 
-*8:02–9:22 · cca 80 s*
+*8:10–9:05 · cca 55 s*
 
-Co s tím? Dvě opravy měření a dvě opravy shrnutí. První: **zátěž posílat podle plánu, ne podle odpovědí**. Tomu se říká otevřený model a popsali ho už v roce 2006 Schroeder, Wierman a Harchol-Balter. V JMeteru ho od verze 5.5 dělá **Open Model Thread Group**, která plánuje příchody požadavků místo počtu vláken. Podobně to umí nástroj k6 nebo wrk2. `[KLIK]` Druhá: **čas počítat od okamžiku, kdy požadavek MĚL odejít**. Knihovna HdrHistogram, která zaznamenává latence do histogramu, umí chybějící vzorky dopočítat, když zná plánovaný interval. `[KLIK]` Třetí: místo jednoho čísla **hlásit rozdělení, tedy percentily a maximum**. `[KLIK]` Čtvrtá: při agregaci přes čas nebo servery **slučovat histogramy, ne percentily**. A nejrychlejší kontrola, kterou můžete udělat hned: **sedí skutečná propustnost testu s plánovanou**? Propustnost je počet požadavků za sekundu. Pokud generátor poslal méně požadavků, než měl, čekal.
+Opravy jsou dvě na měření a dvě na shrnutí. První: **posílat zátěž podle plánu, ne podle odpovědí**. Tomu se říká otevřený model. V JMeteru ho od verze 5.5 umí **Open Model Thread Group**, která neplánuje počet vláken, ale příchody požadavků. Podobně to umí nástroj k6 nebo wrk2. `[KLIK]` Druhá: **počítat čas od chvíle, kdy požadavek měl odejít**. Knihovna HdrHistogram, která ukládá latence do histogramu, umí chybějící vzorky i dopočítat. `[KLIK]` Třetí: místo jednoho čísla **hlásit rozdělení, tedy percentily a maximum**. `[KLIK]` A čtvrtá: při sčítání přes čas nebo servery **slučovat histogramy, ne percentily**. A jedna kontrola, kterou zvládnete hned: **sedí skutečná propustnost testu s plánovanou**? Propustnost je počet požadavků za sekundu. Pokud nástroj poslal méně požadavků, než měl, čekal.
 
 ## 14 · Závěr
 
-*9:22–9:57 · cca 35 s*
+*9:05–9:35 · cca 30 s*
 
-Na závěr. Ve všech příkladech s měřením byl server pokaždé stejný. Rozdíl dělal jen způsob, jak jsme čísla získali a jak jsme je shrnuli. **Číslo je jen tak dobré jako způsob, jakým vzniklo**. Až příště uvidíte graf latence, položte si tři otázky. `[KLIK]` Odkud se počítá čas? Od plánovaného odeslání, nebo až od skutečného? `[KLIK]` Je to průměr? Pokud ano, chtějte percentily a maximum. `[KLIK]` A jak se data agregovala? Pokud se průměrovaly percentily, číslo neplatí.
+Ve všech příkladech s měřením byl server pořád stejný. **Číslo je jen tak dobré jako způsob, jakým vzniklo.** Až příště uvidíte graf latence, zkuste si položit tři otázky. `[KLIK]` Odkud se počítá čas? Od plánovaného odeslání, nebo až od skutečného? `[KLIK]` Je to průměr? Pokud ano, chtějte percentily a maximum. `[KLIK]` A jak se data sčítala? Pokud někdo průměroval percentily, to číslo neplatí.
 
 ## 15 · Zdroje a poděkování
 
-*9:57–10:07 · cca 10 s*
+*9:35–9:45 · cca 10 s*
 
-Zdroje najdete tady, celá prezentace je online i s odkazy. Děkuji za pozornost a rád odpovím na otázky.
+Zdroje najdete tady a celá prezentace je online i s odkazy. Děkuji za pozornost a rád odpovím na otázky.
 
 ---
 

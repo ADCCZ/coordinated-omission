@@ -17,9 +17,10 @@
   --navy-2: #16243a;
   --on-dark: #ede9df;
   --on-dark-muted: #9aa3b2;
-  --serif: 'Fraunces Variable', Fraunces, Georgia, serif;
-  --sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+  --serif: 'Big Shoulders Display Variable', 'Arial Narrow', sans-serif;
+  --sans: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --code: 'Martian Mono Variable', ui-monospace, monospace;
   --ease: cubic-bezier(0.22, 0.75, 0.12, 1);
   --t: 0.7s;
 }
@@ -86,7 +87,7 @@ body {
 /* ---------- hlavička protokolu ---------- */
 .head { left: 128px; right: 128px; top: 52px; height: 48px; }
 .head .rule { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; opacity: 0.3; }
-.head p { position: absolute; top: 0; font: 500 20px/1 var(--mono); letter-spacing: 1.5px; text-transform: uppercase; }
+.head p { position: absolute; top: 0; font: 600 23px/1 var(--mono); letter-spacing: 2.5px; text-transform: uppercase; }
 .head .l { left: 0; }
 .head .c { left: 50%; transform: translateX(-50%); white-space: nowrap; }
 .head .r { right: 0; }
@@ -99,43 +100,41 @@ body {
 
 /* ---------- typografie ---------- */
 .kicker {
-  font: 500 22px/1.3 var(--mono);
-  letter-spacing: 1.5px;
+  font: 700 25px/1.3 var(--mono);
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--teal);
 }
 .kicker::before { content: ''; display: inline-block; width: 12px; height: 12px; background: currentColor; margin-right: 14px; vertical-align: 1px; }
 .kicker.plain::before { display: none; }
 .dark .kicker { color: var(--amber); }
-.label { font: 500 20px/1.3 var(--mono); letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+.label { font: 600 23px/1.3 var(--mono); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
 .dark .label { color: var(--on-dark-muted); }
 
 .title {
   font-family: var(--serif);
-  font-weight: 600;
-  font-size: 76px;
-  line-height: 1.02;
-  letter-spacing: -1.5px;
-  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  font-weight: 800;
+  font-size: 84px;
+  line-height: 0.98;
+  letter-spacing: 0;
 }
 .display {
   font-family: var(--serif);
-  font-weight: 650;
-  line-height: 0.95;
-  letter-spacing: -3px;
-  font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+  font-weight: 850;
+  line-height: 0.92;
+  letter-spacing: 0;
 }
-.italic { font-family: var(--serif); font-style: italic; font-weight: 400; font-variation-settings: 'opsz' 144, 'SOFT' 100; }
+.italic { font-family: var(--sans); font-style: italic; font-weight: 500; letter-spacing: -1px; }
 .body { font-size: 32px; line-height: 1.4; }
 .small { font-size: 26px; line-height: 1.4; }
-.h3 { font-family: var(--serif); font-size: 40px; font-weight: 600; line-height: 1.1; letter-spacing: -0.5px; }
+.h3 { font-family: var(--serif); font-size: 44px; font-weight: 800; line-height: 1.05; letter-spacing: 0; }
 
 /* údaje „displeje“: čísla v mono */
 .read {
-  font-family: var(--mono);
-  font-weight: 600;
+  font-family: var(--serif);
+  font-weight: 800;
   line-height: 1;
-  letter-spacing: -2px;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
 .read .u { font-weight: 400; font-size: 0.45em; letter-spacing: 0; margin-left: 0.18em; color: var(--muted); }
@@ -170,10 +169,10 @@ b { font-weight: 600; }
   box-shadow: 0 1px 0 rgba(22, 32, 46, 0.04), 0 18px 40px -28px rgba(22, 32, 46, 0.35);
 }
 .dark .panel { background: var(--navy-2); border-color: #26354d; box-shadow: none; }
-.panel .n { font: 500 20px/1 var(--mono); letter-spacing: 1.5px; color: var(--teal); }
+.panel .n { font: 700 23px/1 var(--mono); letter-spacing: 2.5px; color: var(--teal); }
 .chip {
   display: inline-block;
-  font: 500 21px/1.45 var(--mono);
+  font: 500 19px/1.5 var(--code);
   background: var(--teal-soft);
   color: #0a4f4b;
   border-radius: 10px;
@@ -182,19 +181,19 @@ b { font-weight: 600; }
 
 /* tabulka s měřením */
 .tbl { border-collapse: collapse; font-size: 30px; }
-.tbl th { font: 500 20px/1.2 var(--mono); letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 24px 16px 0; }
+.tbl th { font: 600 23px/1.2 var(--mono); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 24px 16px 0; }
 .tbl td { padding: 12px 24px 12px 0; border-top: 1.5px solid var(--line); height: 74px; }
-.tbl td.v { font-family: var(--mono); font-weight: 600; font-size: 40px; letter-spacing: -1px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl td.v { font-family: var(--serif); font-weight: 800; font-size: 48px; letter-spacing: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .tbl .col-u { background: var(--plum-soft); padding-left: 24px; }
 .tbl th.col-u { color: var(--plum); border-radius: 12px 12px 0 0; padding-top: 16px; }
 .tbl tr:last-child .col-u { border-radius: 0 0 12px 12px; }
 
 /* zdroje */
 .src { display: grid; grid-template-columns: 52px 1fr; column-gap: 8px; }
-.src .i { font: 500 20px/1.6 var(--mono); color: var(--teal); }
+.src .i { font: 700 23px/1.4 var(--mono); color: var(--teal); }
 .src .t { font-size: 25px; line-height: 1.3; font-weight: 600; }
 .src .t span { font-weight: 400; color: var(--muted); }
-.src a { display: block; font: 400 18px/1.4 var(--mono); color: var(--muted); text-decoration: none; margin-top: 4px; word-break: break-all; }
+.src a { display: block; font: 400 16px/1.5 var(--code); color: var(--muted); text-decoration: none; margin-top: 4px; word-break: break-all; }
 .src a:hover { color: var(--teal); }
 
 /* ---------- odhalování kroků ---------- */

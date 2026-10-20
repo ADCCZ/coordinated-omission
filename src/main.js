@@ -1,11 +1,10 @@
-import '@fontsource-variable/fraunces/full.css';
-import '@fontsource-variable/fraunces/full-italic.css';
-import '@fontsource/ibm-plex-sans/400.css';
-import '@fontsource/ibm-plex-sans/400-italic.css';
-import '@fontsource/ibm-plex-sans/600.css';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/500.css';
-import '@fontsource/ibm-plex-mono/600.css';
+import '@fontsource-variable/big-shoulders-display';
+import '@fontsource/barlow/500.css';
+import '@fontsource/barlow/500-italic.css';
+import '@fontsource/barlow/700.css';
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
+import '@fontsource-variable/martian-mono';
 import './style.css';
 import { slides } from './slides.js';
 
