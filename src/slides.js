@@ -19,7 +19,7 @@ const C = {
   onDark: '#EDE9DF',
   onDarkMuted: '#9AA3B2',
 };
-const MONO = `font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600"`;
+const MONO = `font-family="IBM Plex Mono, monospace"`;
 
 // --- pomocné SVG -------------------------------------------------------------
 

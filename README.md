@@ -1,6 +1,6 @@
 # Coordinated Omission a pasti průměrných časů
 
-Referát z předmětu **KIV/PTE – Pokročilé testování** (ZČU FAV), cca 10 minut. Webová prezentace ve stylu „měřicího protokolu“ (milimetrový papír, tmavé displeje, Big Shoulders Display + Barlow): 15 slidů, krokované odhalování, přechody mezi slidy, načítající se čísla a režim řečníka s textem k přednesu.
+Referát z předmětu **KIV/PTE – Pokročilé testování** (ZČU FAV), cca 10 minut. Webová prezentace ve stylu „měřicího protokolu“ (milimetrový papír, tmavé displeje, Fraunces + IBM Plex): 15 slidů, krokované odhalování, přechody mezi slidy, načítající se čísla a režim řečníka s textem k přednesu.
 
 Autor: Oldřich Jan Švehla.
 
