@@ -36,11 +36,11 @@
   <h2>4 · Výpočty ze slidů</h2>
   <table class="calc">
     <tr><th>Myšlenkový pokus, benchmark</th><td>(10 000 × 1 ms + 1 × 100 000 ms) / 10 001 ≈ 11,0 ms. Tene na slidu uvádí „10.9 msec“, přesně je to 10,999 ms.</td></tr>
-    <tr><th>Myšlenkový pokus, uživatelé</th><td>10 000 požadavků po 1 ms + 10 000 požadavků čekajících 100 s, 99,99 s, … 0,01 s (průměr ≈ 50 s) → (10 s + 10 000 × 50,005 s) / 20 000 ≈ 25 s. p75 = 15 000. hodnota ≈ 50 s, p99,99 ≈ 100 s.</td></tr>
+    <tr><th>Myšlenkový pokus, uživatelé</th><td>10 000 požadavků po 1 ms + 10 000 požadavků čekajících 100 s, 99,99 s, … 0,01 s (průměr ≈ 50 s) → (10 s + 10 000 × 50,005 s) / 20 000 ≈ 25 s. Pro percentily si všech 20 000 hodnot seřaď od nejmenší: prvních 10 000 je rychlých (1 ms), za nimi jsou čekající požadavky od 0,01 s do 100 s. Medián je 10 000. hodnota, tedy poslední rychlá (1 ms). 75. percentil je 15 000. hodnota, tedy prostředek pomalé poloviny (≈ 50 s). 99,99. percentil je 19 998. hodnota, skoro úplně nahoře (≈ 100 s).</td></tr>
     <tr><th>wrk2</th><td>1 270 ms / 6,04 ms ≈ 210 → README uvádí „200x“.</td></tr>
     <tr><th>Past 1</th><td>0,95 × 10 ms + 0,05 × 810 ms = 9,5 + 40,5 = 50 ms. p99 systému B leží v horních 5 %, tedy 810 ms.</td></tr>
-    <tr><th>Past 2</th><td>(59 × 20 ms + 5 000 ms) / 60 = 6 180 / 60 = 103 ms. Pomalá minuta = 1/60 ≈ 1,67 % požadavků &gt; 1 % → skutečné p99 = 5 s.</td></tr>
-    <tr><th>Past 3</th><td>P(aspoň jeden pomalý z n) = 1 − 0,99ⁿ. n = 10 → 9,6 %, n = 100 → 63,4 %. Předpoklad: servery jsou pomalé nezávisle na sobě.</td></tr>
+    <tr><th>Past 2</th><td>(59 × 20 ms + 5 000 ms) / 60 = 6 180 / 60 = 103 ms. Pomalá minuta = 1/60 ≈ 1,67 % požadavků &gt; 1 % → skutečné p99 = 5 s. Osa grafu je logaritmická, protože 5 s je 250krát víc než 20 ms: na lineární ose by běžné minuty měřily zhruba 1 pixel a nebyly by vidět.</td></tr>
+    <tr><th>Past 3</th><td>Každý server je rychlý s pravděpodobností 0,99. Že je rychlých všech n serverů, je 0,99ⁿ, pro n = 100 asi 37 %. Opak, tedy aspoň jeden pomalý, je 1 − 0,99ⁿ. n = 10 → 9,6 %, n = 100 → 63,4 %. Předpoklad: servery jsou pomalé nezávisle na sobě.</td></tr>
   </table>
 
   <h2>5 · Možné otázky po referátu</h2>
