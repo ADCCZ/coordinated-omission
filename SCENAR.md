@@ -4,7 +4,7 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **9:00** (737 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
+Plánovaná délka **9:50** (790 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
@@ -88,13 +88,13 @@ Dvě opravy měření a dvě opravy shrnutí. První: **posílat zátěž podle 
 
 ## 14 · Závěr
 
-*8:10–8:50 · cca 40 s*
+*8:10–9:40 · cca 90 s*
 
-V myšlenkovém pokusu i u wrk2 byl server pořád stejný, lišilo se jen měření. **Číslo je jen tak dobré jako způsob, jakým vzniklo.** Takže u každého grafu latence: `[KLIK]` Odkud se počítá čas? **Má se počítat od plánovaného odeslání, ne od skutečného.** `[KLIK]` Je to průměr? **Pak chtějte percentily a maximum.** `[KLIK]` A jak se data sčítala? **Pokud někdo průměroval percentily, číslo neplatí. Sčítat se mají histogramy.**
+V myšlenkovém pokusu i u wrk2 byl server pořád stejný, lišilo se jen měření. **Číslo je jen tak dobré jako způsob, jakým vzniklo.** Takže u každého grafu latence: `[KLIK]` Odkud se počítá čas? **Má se počítat od chvíle, kdy požadavek podle plánu měl odejít, ne od chvíle, kdy ho nástroj skutečně poslal.** Jinak se čekání ve frontě do výsledku vůbec nedostane, přesně jako v tom myšlenkovém pokusu. `[KLIK]` Je to průměr? **Pak chtějte vidět percentily a maximum.** Průměr schová ocas rozdělení, tedy právě ty pomalé odpovědi, které uživatelé vnímají nejvíc. `[KLIK]` A jak se data sčítala? **Pokud někdo průměroval percentily po minutách nebo po serverech, výsledné číslo neplatí.** Správně se sčítají celé histogramy a percentil se spočítá až z výsledku.
 
 ## 15 · Zdroje a poděkování
 
-*8:50–9:00 · cca 10 s*
+*9:40–9:50 · cca 10 s*
 
 Zdroje jsou tady i online. Děkuji za pozornost a rád odpovím na otázky.
 

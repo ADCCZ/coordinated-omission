@@ -431,7 +431,7 @@ ${[
     cls: 'dark',
     section: 'Závěr',
     tr: 'zoom',
-    sec: 40,
+    sec: 90,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:1200px">Závěr · tři otázky ke každému grafu latence</p>
 <h2 class="display" data-split style="left:124px;top:206px;width:1600px;font-size:104px;line-height:1.02;letter-spacing:-2px">Číslo je jen tak dobré jako způsob, jakým vzniklo.</h2>
@@ -449,7 +449,7 @@ ${[
 </div>`
   )
   .join('')}`,
-    notes: `V myšlenkovém pokusu i u wrk2 byl server pořád stejný, lišilo se jen měření. ==Číslo je jen tak dobré jako způsob, jakým vzniklo.== Takže u každého grafu latence: [KLIK] Odkud se počítá čas? ==Má se počítat od plánovaného odeslání, ne od skutečného.== [KLIK] Je to průměr? ==Pak chtějte percentily a maximum.== [KLIK] A jak se data sčítala? ==Pokud někdo průměroval percentily, číslo neplatí. Sčítat se mají histogramy.==`,
+    notes: `V myšlenkovém pokusu i u wrk2 byl server pořád stejný, lišilo se jen měření. ==Číslo je jen tak dobré jako způsob, jakým vzniklo.== Takže u každého grafu latence: [KLIK] Odkud se počítá čas? ==Má se počítat od chvíle, kdy požadavek podle plánu měl odejít, ne od chvíle, kdy ho nástroj skutečně poslal.== Jinak se čekání ve frontě do výsledku vůbec nedostane, přesně jako v tom myšlenkovém pokusu. [KLIK] Je to průměr? ==Pak chtějte vidět percentily a maximum.== Průměr schová ocas rozdělení, tedy právě ty pomalé odpovědi, které uživatelé vnímají nejvíc. [KLIK] A jak se data sčítala? ==Pokud někdo průměroval percentily po minutách nebo po serverech, výsledné číslo neplatí.== Správně se sčítají celé histogramy a percentil se spočítá až z výsledku.`,
   },
 
   {
