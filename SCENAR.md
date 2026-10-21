@@ -4,7 +4,7 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **10:00** (817 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
+Plánovaná délka **10:00** (820 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
@@ -18,7 +18,7 @@ Dobrý den. Doba odezvy je jednou z hlavních metrik zátěžových testů. Dnes
 
 *0:55–1:35 · cca 40 s*
 
-Nejdřív krátce, kam mířím. Coordinated omission je **chyba v tom, co naměříte**: nástroj se zasekne spolu se systémem a nejhorší chvíle v datech chybí. To jsou prázdné kroužky na obrázku vlevo. Průměr je **chyba v tom, jak to shrnete**: schová ocas, tedy nejpomalejší odpovědi na obrázku vpravo. `[KLIK]` Zkrátka: **první kazí data, druhá závěry**.
+Nejdřív krátce, kam mířím. Coordinated omission je **chyba v tom, co naměříte**: nástroj se zasekne spolu se systémem a většina nejhorších chvil v datech chybí. To jsou prázdné kroužky na obrázku vlevo. Průměr je **chyba v tom, jak to shrnete**: schová ocas, tedy nejpomalejší odpovědi na obrázku vpravo. `[KLIK]` Zkrátka: **první kazí data, druhá závěry**.
 
 ## 03 · Předěl: Co měříme
 
@@ -66,13 +66,13 @@ První je samotný průměr. Systém A odpoví vždy za padesát milisekund. Sys
 
 *5:55–6:55 · cca 60 s*
 
-Druhá past je skoro v každém dashboardu: 99. percentil za každou minutu a pak jejich průměr za hodinu. Tady má 59 minut dvacet milisekund a jedna minuta pět sekund. Pozor, osa je logaritmická. Průměr vyjde 103 milisekund. `[KLIK]` Jenže ta minuta je šedesátina provozu, asi 1,7 procenta, tedy víc než jedno procento. **Skutečný 99. percentil je pět sekund.** **Percentily průměrovat nejde.** Sčítat se mají histogramy. Histogram je jen počet měření v jednotlivých intervalech, takže se dá sčítat, a percentil se spočítá až ze součtu.
+Druhá past je v dashboardech monitoringu častá: 99. percentil za každou minutu a pak jejich průměr za hodinu. Tady má 59 minut dvacet milisekund a jedna minuta pět sekund. Pozor, osa je logaritmická. Průměr vyjde 103 milisekund. `[KLIK]` Jenže ta minuta je šedesátina provozu, asi 1,7 procenta, tedy víc než jedno procento. **Skutečný 99. percentil je pět sekund.** **Percentily průměrovat nejde.** Sčítat se mají histogramy. Histogram je jen počet měření v jednotlivých intervalech, takže se dá sčítat, a percentil se spočítá až ze součtu.
 
 ## 11 · Past 3: fan-out (The Tail at Scale)
 
 *6:55–7:45 · cca 50 s*
 
-Třetí past popsali Dean a Barroso z Googlu. Server je pomalý, tedy sekundu a víc, jen v jednom případě ze sta. `[KLIK]` Velké systémy ale rozdělí jeden dotaz na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí to poslední. Při sto serverech je šance, že budou všechny rychlé, 0,99 na stou, asi 37 procent. Takže **aspoň jeden pomalý je v 63 procentech**. `[KLIK]` Pro uživatele tak **rozhoduje ocas.**
+Třetí past popsali Dean a Barroso z Googlu. Server je pomalý, tedy sekundu a víc, jen v jednom případě ze sta. `[KLIK]` Velké služby ale často rozdělí jeden dotaz na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí to poslední. Při sto serverech je šance, že budou všechny rychlé, 0,99 na stou, asi 37 procent. Takže **aspoň jeden pomalý je v 63 procentech**. `[KLIK]` Pro uživatele tak **rozhoduje ocas.**
 
 ## 12 · Předěl: Jak měřit správně
 
@@ -84,7 +84,7 @@ Co s tím?
 
 *7:50–8:40 · cca 50 s*
 
-Opravy jsou čtyři. První: **posílat zátěž podle plánu, ne podle odpovědí**. V JMeteru to umí **Open Model Thread Group**, která místo počtu vláken plánuje příchody požadavků. `[KLIK]` Druhá: **počítat čas od plánovaného odeslání**. Knihovna HdrHistogram umí chybějící vzorky dopočítat. `[KLIK]` Třetí: **hlásit percentily a maximum**. `[KLIK]` Čtvrtá: **slučovat histogramy, ne percentily**. A rychlá kontrola: **sedí skutečná propustnost s plánovanou**? Propustnost je počet požadavků za sekundu. Když je nižší, nástroj čekal.
+Opravy jsou čtyři. První: **posílat zátěž podle plánu, ne podle odpovědí**. V JMeteru to umí **Open Model Thread Group**, která místo počtu vláken plánuje příchody požadavků. `[KLIK]` Druhá: **počítat čas od plánovaného odeslání**. Knihovna HdrHistogram umí chybějící vzorky dopočítat. `[KLIK]` Třetí: **hlásit percentily a maximum**. `[KLIK]` Čtvrtá: **slučovat histogramy, ne percentily**. A rychlá kontrola: **sedí skutečná propustnost s plánovanou**? Propustnost je počet požadavků za sekundu. Když je nižší, nástroj nejspíš čekal.
 
 ## 14 · Závěr
 

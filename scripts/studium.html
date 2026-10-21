@@ -7,7 +7,7 @@
   <h2>1 · Pojmy v jedné větě</h2>
   <table class="gloss">
     <tr><th>Doba odezvy<br><span>response time</span></th><td>Čas od chvíle, kdy klient požadavek odeslal (správně: <em>měl</em> odeslat), do přijetí odpovědi. Zahrnuje <mark>čekání ve frontě i obsluhu</mark>.</td></tr>
-    <tr><th>Doba obsluhy<br><span>service time</span></th><td>Čas, kdy server požadavek skutečně zpracovává. Tohle měří generátor zasažený coordinated omission.</td></tr>
+    <tr><th>Doba obsluhy<br><span>service time</span></th><td>Čas, kdy server požadavek skutečně zpracovává. Generátor zasažený coordinated omission měří hlavně tohle.</td></tr>
     <tr><th>Propustnost<br><span>throughput</span></th><td>Počet dokončených požadavků za jednotku času (req/s).</td></tr>
     <tr><th>Percentil pXX</th><td>Hodnota, pod kterou leží XX % měření. p50 = medián; p99 = jen 1 % požadavků je pomalejší.</td></tr>
     <tr><th>Ocas rozdělení<br><span>tail</span></th><td>Nejpomalejší odpovědi, typicky nad p99. Průměr a medián o něm nic neřeknou.</td></tr>
@@ -56,7 +56,7 @@
     <dt>Proč se v myšlenkovém pokusu nezměnil medián?</dt>
     <dd>Polovina všech požadavků (prvních 100 s) je rychlá, takže medián leží přesně na hranici a zůstane na 1 ms. Medián o horší polovině neříká vůbec nic.</dd>
     <dt>Jak poznám coordinated omission ve výsledcích?</dt>
-    <dd>Nejrychleji: <mark>skutečná propustnost je nižší než plánovaná</mark> (v JMeteru Throughput v Summary Reportu). Dále „díry“ v časové ose vzorků v době, kdy systém zpomalil.</dd>
+    <dd>Nejrychlejší varovný signál: <mark>skutečná propustnost je nižší než plánovaná</mark> (v JMeteru Throughput v Summary Reportu). Nižší propustnost ale může mít i jiné příčiny, třeba přetížený generátor nebo chyby, takže je to důvod se podívat blíž, ne důkaz. Dále „díry“ v časové ose vzorků v době, kdy systém zpomalil.</dd>
     <dt>Dá se s ocasem u fan-outu něco dělat?</dt>
     <dd>Dean a Barroso navrhují mimo jiné <b>hedged requests</b>: když odpověď nepřijde do očekávaného p95, pošle se stejný požadavek ještě jiné replice a použije se ta rychlejší odpověď. Zátěž to zvýší jen asi o 5 % a ocas výrazně zkrátí.</dd>
     <dt>Týká se to jen nástrojů na zátěžové testy?</dt>

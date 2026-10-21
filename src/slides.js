@@ -158,7 +158,7 @@ export const slides = [
   <p class="small" style="margin-top:24px">Jedno číslo schová ocas rozdělení. A právě ten zažívají uživatelé.</p>
 </div>
 <p class="italic" data-step="1" style="left:128px;top:770px;width:1664px;font-size:80px;line-height:1.1">První kazí data. <span class="plum">Druhá kazí závěry.</span></p>`,
-    notes: `Nejdřív krátce, kam mířím. Coordinated omission je ==chyba v tom, co naměříte==: nástroj se zasekne spolu se systémem a nejhorší chvíle v datech chybí. To jsou prázdné kroužky na obrázku vlevo. Průměr je ==chyba v tom, jak to shrnete==: schová ocas, tedy nejpomalejší odpovědi na obrázku vpravo. [KLIK] Zkrátka: ==první kazí data, druhá závěry==.`,
+    notes: `Nejdřív krátce, kam mířím. Coordinated omission je ==chyba v tom, co naměříte==: nástroj se zasekne spolu se systémem a většina nejhorších chvil v datech chybí. To jsou prázdné kroužky na obrázku vlevo. Průměr je ==chyba v tom, jak to shrnete==: schová ocas, tedy nejpomalejší odpovědi na obrázku vpravo. [KLIK] Zkrátka: ==první kazí data, druhá závěry==.`,
   },
 
   {
@@ -344,7 +344,7 @@ ${[
   <p class="read plum" style="font-size:96px;margin-top:12px"><span data-count>5000</span><span class="u">ms</span></p>
 </div>
 <p class="muted" data-step="1" style="left:128px;top:928px;width:1664px;font-size:22px;line-height:1.3">Předpoklad: stejný provoz každou minutu, ve výpadku trvá každý požadavek 5 s. Pomalých je tedy 1/60 ≈ 1,7 % požadavků, víc než 1 %.</p>`,
-    notes: `Druhá past je skoro v každém dashboardu: 99. percentil za každou minutu a pak jejich průměr za hodinu. Tady má 59 minut dvacet milisekund a jedna minuta pět sekund. Pozor, osa je logaritmická. Průměr vyjde 103 milisekund. [KLIK] Jenže ta minuta je šedesátina provozu, asi 1,7 procenta, tedy víc než jedno procento. ==Skutečný 99. percentil je pět sekund.== ==Percentily průměrovat nejde.== Sčítat se mají histogramy. Histogram je jen počet měření v jednotlivých intervalech, takže se dá sčítat, a percentil se spočítá až ze součtu.`,
+    notes: `Druhá past je v dashboardech monitoringu častá: 99. percentil za každou minutu a pak jejich průměr za hodinu. Tady má 59 minut dvacet milisekund a jedna minuta pět sekund. Pozor, osa je logaritmická. Průměr vyjde 103 milisekund. [KLIK] Jenže ta minuta je šedesátina provozu, asi 1,7 procenta, tedy víc než jedno procento. ==Skutečný 99. percentil je pět sekund.== ==Percentily průměrovat nejde.== Sčítat se mají histogramy. Histogram je jen počet měření v jednotlivých intervalech, takže se dá sčítat, a percentil se spočítá až ze součtu.`,
   },
 
   {
@@ -384,7 +384,7 @@ ${[
 </svg>
 </div>
 <p class="body" data-step="2" style="left:128px;top:880px;width:1664px">Medián ani p99 jednoho serveru neřekne, co zažije uživatel. <span class="mark">Rozhoduje ocas.</span></p>`,
-    notes: `Třetí past popsali Dean a Barroso z Googlu. Server je pomalý, tedy sekundu a víc, jen v jednom případě ze sta. [KLIK] Velké systémy ale rozdělí jeden dotaz na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí to poslední. Při sto serverech je šance, že budou všechny rychlé, 0,99 na stou, asi 37 procent. Takže ==aspoň jeden pomalý je v 63 procentech==. [KLIK] Pro uživatele tak ==rozhoduje ocas.==`,
+    notes: `Třetí past popsali Dean a Barroso z Googlu. Server je pomalý, tedy sekundu a víc, jen v jednom případě ze sta. [KLIK] Velké služby ale často rozdělí jeden dotaz na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí to poslední. Při sto serverech je šance, že budou všechny rychlé, 0,99 na stou, asi 37 procent. Takže ==aspoň jeden pomalý je v 63 procentech==. [KLIK] Pro uživatele tak ==rozhoduje ocas.==`,
   },
 
   {
@@ -422,8 +422,8 @@ ${[
 </div>`
   )
   .join('')}
-<p class="small" style="left:128px;top:916px;width:1664px"><b>Rychlá kontrola:</b> sedí skutečná propustnost s plánovanou? <span class="muted">(JMeter: Throughput v Summary Reportu)</span> Pokud ne, generátor čekal.</p>`,
-    notes: `Opravy jsou čtyři. První: ==posílat zátěž podle plánu, ne podle odpovědí==. V JMeteru to umí ==Open Model Thread Group==, která místo počtu vláken plánuje příchody požadavků. [KLIK] Druhá: ==počítat čas od plánovaného odeslání==. Knihovna HdrHistogram umí chybějící vzorky dopočítat. [KLIK] Třetí: ==hlásit percentily a maximum==. [KLIK] Čtvrtá: ==slučovat histogramy, ne percentily==. A rychlá kontrola: ==sedí skutečná propustnost s plánovanou==? Propustnost je počet požadavků za sekundu. Když je nižší, nástroj čekal.`,
+<p class="small" style="left:128px;top:916px;width:1664px"><b>Rychlá kontrola:</b> sedí skutečná propustnost s plánovanou? <span class="muted">(JMeter: Throughput v Summary Reportu)</span> Pokud je nižší, generátor nejspíš čekal.</p>`,
+    notes: `Opravy jsou čtyři. První: ==posílat zátěž podle plánu, ne podle odpovědí==. V JMeteru to umí ==Open Model Thread Group==, která místo počtu vláken plánuje příchody požadavků. [KLIK] Druhá: ==počítat čas od plánovaného odeslání==. Knihovna HdrHistogram umí chybějící vzorky dopočítat. [KLIK] Třetí: ==hlásit percentily a maximum==. [KLIK] Čtvrtá: ==slučovat histogramy, ne percentily==. A rychlá kontrola: ==sedí skutečná propustnost s plánovanou==? Propustnost je počet požadavků za sekundu. Když je nižší, nástroj nejspíš čekal.`,
   },
 
   {
