@@ -123,7 +123,7 @@ export const slides = [
 <p class="body" style="left:128px;top:490px;width:900px;color:${C.onDarkMuted}">Proč benchmark ukazuje rychlý systém, který uživatelé zažívají jako pomalý.</p>
 <p class="label" style="left:128px;top:990px;width:800px;color:${C.onDark}">Oldřich Jan Švehla</p>
 <p class="label right" style="left:992px;top:990px;width:800px">Pojem: Gil Tene, Azul Systems${cite(1)}</p>`,
-    notes: `Dobrý den. U zátěžových testů nás nejvíc zajímá doba odezvy. Dnes ukážu, ==proč to číslo umí lhát, i když ho nikdo nefalšuje==. Příčiny jsou dvě: ==coordinated omission==, česky koordinované vynechání, pojem od Gila Tene, a ==průměry==. Graf na pozadí to ukazuje zjednodušeně. Vodorovně je čas, svisle doba odezvy. Žlutě je, co naměřil testovací nástroj: ==jeden pomalý vzorek a pak nic==. Růžově je, co zažili uživatelé: kdo přišel na začátku výpadku, čekal nejdéle.`,
+    notes: `Dobrý den. Doba odezvy je jednou z hlavních metrik zátěžových testů. Dnes ukážu, ==proč to číslo umí lhát, i když ho nikdo nefalšuje==. Příčiny jsou dvě: ==coordinated omission==, česky koordinované vynechání, pojem od Gila Tene, a ==průměry==. Graf na pozadí to ukazuje zjednodušeně. Vodorovně je čas, svisle doba odezvy. Žlutě je, co naměřil testovací nástroj: ==jeden pomalý vzorek a pak nic==. Růžově je, co zažili uživatelé: kdo přišel na začátku výpadku, čekal nejdéle.`,
   },
 
   {

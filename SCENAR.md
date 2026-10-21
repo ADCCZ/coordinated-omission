@@ -4,7 +4,7 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **10:00** (816 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
+Plánovaná délka **10:00** (817 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
@@ -12,7 +12,7 @@ V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovač
 
 *0:00–0:55 · cca 55 s*
 
-Dobrý den. U zátěžových testů nás nejvíc zajímá doba odezvy. Dnes ukážu, **proč to číslo umí lhát, i když ho nikdo nefalšuje**. Příčiny jsou dvě: **coordinated omission**, česky koordinované vynechání, pojem od Gila Tene, a **průměry**. Graf na pozadí to ukazuje zjednodušeně. Vodorovně je čas, svisle doba odezvy. Žlutě je, co naměřil testovací nástroj: **jeden pomalý vzorek a pak nic**. Růžově je, co zažili uživatelé: kdo přišel na začátku výpadku, čekal nejdéle.
+Dobrý den. Doba odezvy je jednou z hlavních metrik zátěžových testů. Dnes ukážu, **proč to číslo umí lhát, i když ho nikdo nefalšuje**. Příčiny jsou dvě: **coordinated omission**, česky koordinované vynechání, pojem od Gila Tene, a **průměry**. Graf na pozadí to ukazuje zjednodušeně. Vodorovně je čas, svisle doba odezvy. Žlutě je, co naměřil testovací nástroj: **jeden pomalý vzorek a pak nic**. Růžově je, co zažili uživatelé: kdo přišel na začátku výpadku, čekal nejdéle.
 
 ## 02 · Teze
 
