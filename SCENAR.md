@@ -4,7 +4,7 @@ Tučně jsou klíčové věty. Verze k tisku: SCENAR.pdf.
 
 Referát KIV/PTE (Pokročilé testování), ZČU FAV · Oldřich Jan Švehla
 
-Plánovaná délka **9:00** (729 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
+Plánovaná délka **9:00** (737 slov; čas je odhadnutý podle zkoušky nanečisto, asi 80 slov za minutu včetně pauz a kliků).
 `[KLIK]` znamená posun na další krok (šipka → nebo mezerník).
 V prezentaci otevře klávesa **P** režim řečníka s tímto textem, časovačem a náhledem dalšího kroku.
 
@@ -90,7 +90,7 @@ Dvě opravy měření a dvě opravy shrnutí. První: **posílat zátěž podle 
 
 *8:10–8:50 · cca 40 s*
 
-Server byl ve všech příkladech stejný. **Číslo je jen tak dobré jako způsob, jakým vzniklo.** Takže u každého grafu latence: `[KLIK]` Odkud se počítá čas? **Má se počítat od plánovaného odeslání, ne od skutečného.** `[KLIK]` Je to průměr? **Pak chtějte percentily a maximum.** `[KLIK]` A jak se data sčítala? **Pokud někdo průměroval percentily, číslo neplatí. Sčítat se mají histogramy.**
+V myšlenkovém pokusu i u wrk2 byl server pořád stejný, lišilo se jen měření. **Číslo je jen tak dobré jako způsob, jakým vzniklo.** Takže u každého grafu latence: `[KLIK]` Odkud se počítá čas? **Má se počítat od plánovaného odeslání, ne od skutečného.** `[KLIK]` Je to průměr? **Pak chtějte percentily a maximum.** `[KLIK]` A jak se data sčítala? **Pokud někdo průměroval percentily, číslo neplatí. Sčítat se mají histogramy.**
 
 ## 15 · Zdroje a poděkování
 

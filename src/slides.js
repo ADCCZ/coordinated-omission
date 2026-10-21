@@ -449,7 +449,7 @@ ${[
 </div>`
   )
   .join('')}`,
-    notes: `Server byl ve všech příkladech stejný. ==Číslo je jen tak dobré jako způsob, jakým vzniklo.== Takže u každého grafu latence: [KLIK] Odkud se počítá čas? ==Má se počítat od plánovaného odeslání, ne od skutečného.== [KLIK] Je to průměr? ==Pak chtějte percentily a maximum.== [KLIK] A jak se data sčítala? ==Pokud někdo průměroval percentily, číslo neplatí. Sčítat se mají histogramy.==`,
+    notes: `V myšlenkovém pokusu i u wrk2 byl server pořád stejný, lišilo se jen měření. ==Číslo je jen tak dobré jako způsob, jakým vzniklo.== Takže u každého grafu latence: [KLIK] Odkud se počítá čas? ==Má se počítat od plánovaného odeslání, ne od skutečného.== [KLIK] Je to průměr? ==Pak chtějte percentily a maximum.== [KLIK] A jak se data sčítala? ==Pokud někdo průměroval percentily, číslo neplatí. Sčítat se mají histogramy.==`,
   },
 
   {
