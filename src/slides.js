@@ -131,7 +131,7 @@ export const slides = [
     cls: 'paper',
     section: 'Teze',
     tr: 'slide',
-    sec: 35,
+    sec: 40,
     html: `
 <div class="panel" style="left:128px;top:150px;width:808px;height:540px">
   <p class="n">01 · MĚŘENÍ</p>
@@ -158,7 +158,7 @@ export const slides = [
   <p class="small" style="margin-top:24px">Jedno číslo schová ocas rozdělení. A právě ten zažívají uživatelé.</p>
 </div>
 <p class="italic" data-step="1" style="left:128px;top:770px;width:1664px;font-size:80px;line-height:1.1">První kazí data. <span class="plum">Druhá kazí závěry.</span></p>`,
-    notes: `Coordinated omission je ==chyba v tom, co naměříte==: nástroj se zasekne spolu se systémem a nejhorší chvíle v datech chybí. To jsou prázdné kroužky na obrázku vlevo. Průměr je ==chyba v tom, jak to shrnete==: schová ocas, tedy nejpomalejší odpovědi na obrázku vpravo. [KLIK] Zkrátka: ==první kazí data, druhá závěry==.`,
+    notes: `Nejdřív krátce, kam mířím. Coordinated omission je ==chyba v tom, co naměříte==: nástroj se zasekne spolu se systémem a nejhorší chvíle v datech chybí. To jsou prázdné kroužky na obrázku vlevo. Průměr je ==chyba v tom, jak to shrnete==: schová ocas, tedy nejpomalejší odpovědi na obrázku vpravo. [KLIK] Zkrátka: ==první kazí data, druhá závěry==.`,
   },
 
   {
@@ -225,7 +225,7 @@ export const slides = [
     <text x="0" y="212" fill="${C.ink}" font-size="22" ${MONO}>RESPONSE TIME · zažije uživatel = čekání + obsluha</text>
   </svg>
 </div>`,
-    notes: `Tene říká, že se systém a měřič nechtěně sladí: ==když zpomalí systém, zpomalí i měření==. [KLIK] Je to jako anketa, která se ptá jen lidí odcházejících od přepážky. Když je přepážka zavřená, nikdo si nestěžuje. [KLIK] Test pak vidí hlavně dobu obsluhy. ==Uživatel ale zažívá dobu odezvy: čekání ve frontě plus obsluhu.==`,
+    notes: `Tomuhle Tene říká coordinated omission: systém a měřič se nechtěně sladí, ==když zpomalí systém, zpomalí i měření==. [KLIK] Je to jako anketa, která se ptá jen lidí odcházejících od přepážky. Když je přepážka zavřená, nikdo si nestěžuje. [KLIK] Test pak vidí hlavně dobu obsluhy. ==Uživatel ale zažívá dobu odezvy: čekání ve frontě plus obsluhu.==`,
   },
 
   {
@@ -233,7 +233,7 @@ export const slides = [
     cls: 'paper',
     section: '01 · Co měříme',
     tr: 'slide',
-    sec: 75,
+    sec: 80,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:900px">Myšlenkový pokus · Gil Tene${cite('1,8')}</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">100 s běží, 100 s stojí</h2>
@@ -250,7 +250,7 @@ export const slides = [
   <tr><td>99,99. percentil</td><td class="v"><span data-count>1</span> ms</td><td class="v col-u nomove" data-step="1">≈ <span data-count>100</span> s</td></tr>
 </table>
 <p class="body" data-step="2" style="left:128px;top:900px;width:1664px"><span class="mark">Server je v obou sloupcích stejný.</span> Liší se jen způsob měření.</p>`,
-    notes: `Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože ==99. percentil je hodnota, pod kterou leží 99 procent měření==, jeden pomalý vzorek z deseti tisíc s ním nepohne: ==i 99,99. percentil je milisekunda==. [KLIK] Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků. Kdo přišel na začátku, čeká sto sekund, kdo na konci, skoro nic, ==takže v průměru padesát==. Polovina požadavků je rychlá a polovina čeká padesát, ==celkem tedy asi pětadvacet sekund==. [KLIK] ==Server je v obou sloupcích stejný. Liší se jen měření.==`,
+    notes: `Jak velký je rozdíl, ukazuje Teneho myšlenkový pokus. Systém sto sekund odpovídá za milisekundu, pak sto sekund stojí. Nástroj nasbírá deset tisíc rychlých vzorků a jeden stosekundový. Průměr vyjde necelých jedenáct milisekund. A protože ==99. percentil je hodnota, pod kterou leží 99 procent měření==, jeden pomalý vzorek z deseti tisíc s ním nepohne: ==i 99,99. percentil je milisekunda==. [KLIK] Kdyby lidé chodili dál, přišlo by během výpadku dalších deset tisíc požadavků. Kdo přišel na začátku, čeká sto sekund, kdo na konci, skoro nic, ==takže v průměru padesát==. Polovina požadavků je rychlá a polovina čeká padesát, ==celkem tedy asi pětadvacet sekund==. [KLIK] ==Server je v obou sloupcích stejný. Liší se jen měření.==`,
   },
 
   {
@@ -258,7 +258,7 @@ export const slides = [
     cls: 'dark',
     section: '01 · Co měříme',
     tr: 'zoom',
-    sec: 45,
+    sec: 40,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:1600px">wrk2 · 2 000 req/s · 30 s · server pozastaven na 1,4 s${cite(2)}</p>
 <p class="read amber" style="left:118px;top:205px;width:1664px;font-size:340px;letter-spacing:-16px">~<span data-count>200</span>×</p>
@@ -271,7 +271,7 @@ export const slides = [
   <p class="read" style="font-size:110px;margin-top:18px;color:${C.plumLight}"><span data-count>1270</span><span class="u">ms</span></p>
 </div>
 <p class="body" data-step="2" style="left:128px;top:880px;width:1664px">Stejný běh, stejný server. Liší se jen to, <span class="amber">odkud se počítá čas</span>.</p>`,
-    notes: `Tene napsal i wrk2, nástroj na zátěžové testy, který vypíše čísla dvakrát: jednou měřená od skutečného odeslání, jednou od plánovaného. Tomu druhému se říká korekce. V jeho příkladu server na 1,4 sekundy stojí. ==Bez korekce je 99. percentil šest milisekund.== [KLIK] ==S korekcí 1 270==, zhruba dvěstěkrát víc. [KLIK] Rozdíl je jen v tom, že korekce ==počítá čas od chvíle, kdy požadavek měl odejít==.`,
+    notes: `Není to jen teorie: Tene napsal i wrk2, nástroj na zátěžové testy, který vypíše čísla dvakrát: jednou měřená od skutečného odeslání, jednou od plánovaného. Tomu druhému se říká korekce. ==Bez korekce je 99. percentil šest milisekund.== [KLIK] ==S korekcí 1 270==, zhruba dvěstěkrát víc. [KLIK] Stejný běh, jen se ==čas počítá od chvíle, kdy požadavek měl odejít==.`,
   },
 
   {
@@ -352,7 +352,7 @@ ${[
     cls: 'paper',
     section: '02 · Jak to shrneme',
     tr: 'slide',
-    sec: 55,
+    sec: 50,
     html: `
 <p class="kicker" style="left:128px;top:150px;width:1200px">Past 3 · fan-out · Dean &amp; Barroso${cite(4)}</p>
 <h2 class="title" style="left:128px;top:196px;width:1664px">Vzácné na serveru, běžné u uživatele</h2>
@@ -384,7 +384,7 @@ ${[
 </svg>
 </div>
 <p class="body" data-step="2" style="left:128px;top:880px;width:1664px">Medián ani p99 jednoho serveru neřekne, co zažije uživatel. <span class="mark">Rozhoduje ocas.</span></p>`,
-    notes: `Třetí past popsali Dean a Barroso z Googlu. Server je pomalý, tedy sekundu a víc, jen v jednom případě ze sta. [KLIK] Velké systémy ale rozdělí jeden dotaz na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí to poslední. Při sto serverech je šance, že budou všechny rychlé, je 0,99 na stou, asi 37 procent. Takže ==aspoň jeden pomalý je v 63 procentech==. [KLIK] Pro uživatele tak ==rozhoduje ocas.==`,
+    notes: `Třetí past popsali Dean a Barroso z Googlu. Server je pomalý, tedy sekundu a víc, jen v jednom případě ze sta. [KLIK] Velké systémy ale rozdělí jeden dotaz na desítky až stovky paralelních volání a odpověď je hotová, až když dorazí to poslední. Při sto serverech je šance, že budou všechny rychlé, 0,99 na stou, asi 37 procent. Takže ==aspoň jeden pomalý je v 63 procentech==. [KLIK] Pro uživatele tak ==rozhoduje ocas.==`,
   },
 
   {
@@ -423,7 +423,7 @@ ${[
   )
   .join('')}
 <p class="small" style="left:128px;top:916px;width:1664px"><b>Rychlá kontrola:</b> sedí skutečná propustnost s plánovanou? <span class="muted">(JMeter: Throughput v Summary Reportu)</span> Pokud ne, generátor čekal.</p>`,
-    notes: `První: ==posílat zátěž podle plánu, ne podle odpovědí==. V JMeteru to umí ==Open Model Thread Group==, která místo počtu vláken plánuje příchody požadavků. Podobně nástroj k6 nebo wrk2. [KLIK] Druhá: ==počítat čas od plánovaného odeslání==. Knihovna HdrHistogram umí chybějící vzorky dopočítat. [KLIK] Třetí: ==hlásit percentily a maximum==. [KLIK] Čtvrtá: ==slučovat histogramy, ne percentily==. A rychlá kontrola: ==sedí skutečná propustnost s plánovanou==? Propustnost je počet požadavků za sekundu. Když je nižší, nástroj čekal.`,
+    notes: `Opravy jsou čtyři. První: ==posílat zátěž podle plánu, ne podle odpovědí==. V JMeteru to umí ==Open Model Thread Group==, která místo počtu vláken plánuje příchody požadavků. [KLIK] Druhá: ==počítat čas od plánovaného odeslání==. Knihovna HdrHistogram umí chybějící vzorky dopočítat. [KLIK] Třetí: ==hlásit percentily a maximum==. [KLIK] Čtvrtá: ==slučovat histogramy, ne percentily==. A rychlá kontrola: ==sedí skutečná propustnost s plánovanou==? Propustnost je počet požadavků za sekundu. Když je nižší, nástroj čekal.`,
   },
 
   {
@@ -449,7 +449,7 @@ ${[
 </div>`
   )
   .join('')}`,
-    notes: `==Číslo je jen tak dobré jako způsob, jakým vzniklo.== Takže u každého grafu latence: [KLIK] Odkud se počítá čas? ==Má se počítat od chvíle, kdy požadavek podle plánu měl odejít, ne od chvíle, kdy ho nástroj skutečně poslal.== Jinak se čekání ve frontě do výsledku vůbec nedostane. [KLIK] Je to průměr? ==Pak chtějte vidět percentily a maximum.== Průměr schová ocas rozdělení, tedy právě ty pomalé odpovědi, které uživatelé vnímají nejvíc. [KLIK] A jak se data sčítala? ==Pokud někdo průměroval percentily po minutách nebo po serverech, výsledné číslo neplatí.== Správně se sčítají celé histogramy a percentil se spočítá až z výsledku.`,
+    notes: `Na závěr jedna myšlenka: ==číslo je jen tak dobré jako způsob, jakým vzniklo.== Takže u každého grafu latence: [KLIK] Odkud se počítá čas? ==Má se počítat od chvíle, kdy požadavek podle plánu měl odejít, ne od chvíle, kdy ho nástroj skutečně poslal.== Jinak se čekání ve frontě do výsledku vůbec nedostane. [KLIK] Je to průměr? ==Pak chtějte vidět percentily a maximum.== Průměr schová ocas rozdělení, tedy právě ty pomalé odpovědi, které uživatelé vnímají nejvíc. [KLIK] A jak se data sčítala? ==Pokud někdo průměroval percentily po minutách nebo po serverech, výsledné číslo neplatí.== Správně se sčítají celé histogramy a percentil se spočítá až z výsledku.`,
   },
 
   {
